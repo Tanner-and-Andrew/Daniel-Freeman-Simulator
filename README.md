@@ -1,2 +1,10 @@
 # Daniel-Freeman-Simulator
-A homestead styled simulation game.
+This game is a farming/homesteading simulator. It involves the player making choices on how to operate his farm, and advancing years to see his profits and losses. At the beginning, they have three options for a family. They can have (1) 3 servants, but no kids, (2) 3 kids but no servants, or (3) 2 kids, 1 servant. You can purchase more servants each round. The trade off is that you have to pay the servants a wage, which costs money. But, you have to feed the children, which costs money, but you don’t have to pay them. Each farmer starts out with 4 equal plots of land. Each round, they can choose to buy another plot if they desire. Each round the family must pay money to feed themselves (number can change depending on how many kids you have) and taxes to the government. Their options each round include advancing, reset, plant, breed, or shop.
+
+How the game works:
+
+Each crop has a specific fail rate and success rate (which is just a percentage). This is the strategy, as you can choose a crop that is very hard to grow, but generally sells at a high price, or, you can choose a crop that is easy to grow, but will only make you a little amount of profit. At the end of each year, it will tell you if the crop was successful and grew, or didn’t germinate and failed.
+Higher risk crops will generally sell at a higher price. The prices will fluctuate for each crop, but not immensely. The high risk will still always give you a good reward. The low risk won’t ever give you a huge reward, but will fluctuate.
+You have options to choose livestock to breed. Your options are cows, sheep, goats, and chickens. They are expensive to buy and breed, but yield more consistency and money. They give you annual rewards (eggs, milk, wool). They also reproduce to create more so your animals are worth more money. You have an option to sell your animals whenever you want. There is always chances that animals die from disease, weather, or other animals/people. But that is very low compared to how it affects the crops. You will have to pay a yearly amount to feed the animals.
+
+Expenses: feeding animals, feeding family, paying servants

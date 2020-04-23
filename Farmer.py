@@ -12,6 +12,7 @@ class Farmer(object):
     def hire_farmHands(self):
         """
         Adds a farmHand to the total amount of farmHands.
+        Raises the salary fee.
         :return:
         """
         confirm = toolbox.get_boolean("Are you sure you want to hire a farm hand? : ")
@@ -21,6 +22,7 @@ class Farmer(object):
     def fire_farmHands(self):
         """
         Removes a farmHand from the total amount.
+        Lowers the salary fee.
         :return:
         """
         confirm = toolbox.get_boolean("Are you sure you want to fire a farm hand? : ")
@@ -31,7 +33,9 @@ class Farmer(object):
     def buy_plot(self):
         """
         Purchases another plot of land for the farmer to use.
-        :return:
+        Adds a plot to self.__totalPlots.
+        Subtracts the price from self.__money.
+        :return: None
         """
         plotPrice = 50
         confirm = toolbox.get_boolean('Are you sure you want to purchase another plot? : ')

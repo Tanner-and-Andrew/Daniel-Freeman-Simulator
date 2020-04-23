@@ -1,5 +1,6 @@
 import toolbox
 
+
 class Farmer(object):
 
     def __init__(self):
@@ -32,7 +33,8 @@ class Farmer(object):
         Purchases another plot of land for the farmer to use.
         :return:
         """
-        confirm = toolbox.get_boolean('Are you sure you want to purchase another plot? :')
+        plotPrice = 50
+        confirm = toolbox.get_boolean('Are you sure you want to purchase another plot? : ')
         if confirm:
             self.__totalPlots += 1
-
+            self.__money = self.__money - plotPrice

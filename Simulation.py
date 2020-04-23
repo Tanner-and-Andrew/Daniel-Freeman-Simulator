@@ -4,7 +4,7 @@ class Simulation(object):
         self.__plotList = []
         self.__menu = 'main'
 
-    def main:
+    def main(self):
         command = 'help'
         self.get_family()
         while command != 'quit';
@@ -24,7 +24,7 @@ class Simulation(object):
             elif command == 'farmhands':
                 self.edit_farmhands()
             elif command == 'land':
-
+                pass
             elif command == 'change-display':
                 self.change_graphics(parameter)
             elif command == 'save':

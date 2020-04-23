@@ -5,3 +5,15 @@ class Plants(object):
         self.__price = price
         self.__risk = risk
         self.__sellValue = sellValue
+
+    def get_type(self):
+        return self.__type
+
+    def get_price(self):
+        return self.__price
+
+    def get_risk(self):
+        return self.__risk
+
+    def get_sellValue(self):
+        return self.__sellValue

@@ -27,3 +27,12 @@ class Farmer(object):
             amount = toolbox.get_integer_between(1, self.__farmHands, "How many farm hands would you like to fire?: ")
             self.__farmHands = self.__farmHands - amount
 
+    def buy_plot(self):
+        """
+        Purchases another plot of land for the farmer to use.
+        :return:
+        """
+        confirm = toolbox.get_boolean('Are you sure you want to purchase another plot? :')
+        if confirm:
+            self.__totalPlots += 1
+

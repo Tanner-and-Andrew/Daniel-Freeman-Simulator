@@ -1,3 +1,8 @@
+from Farmer import Farmer
+from Economy import Economy
+from Plot import Plot
+
+
 class Simulation(object):
 
     def __init__(self):

@@ -1,13 +1,23 @@
 import toolbox
+from Plot import Plot
 
 
 class Farmer(object):
 
-    def __init__(self):
-        self.__farmHands = 0
-        self.__family = 0
-        self.__money = 0
-        self.__totalPlots = 0
+    def __init__(self, family, farmHands):
+        self.__farmHands = farmHands
+        self.__family = family
+        self.__money = 200
+        self.__totalPlots = ['plot', 'plot', 'plot', 'plot']
+
+    def __str__(self):
+        string = 'Family Members:'
+        string += f'\nTotal = {self.__family}'
+        string += f'\nWorkers = {self.__family - 1}'
+        string += f'\n\nFarm Hands = {self.__farmHands}'
+        string += f'\n\nMoney = {self.__money}'
+        string += f'\n\nPlots = {len(self.__totalPlots)}'
+        print(string)
 
     def hire_farmHands(self):
         """
@@ -40,5 +50,10 @@ class Farmer(object):
         plotPrice = 50
         confirm = toolbox.get_boolean('Are you sure you want to purchase another plot? : ')
         if confirm:
-            self.__totalPlots += 1
             self.__money = self.__money - plotPrice
+            if self.__money < 0:
+                self.__money = self.__money + plotPrice
+                print("You don't have enough money to make this purchase.")
+            else:
+                self.__totalPlots.append('plot')
+

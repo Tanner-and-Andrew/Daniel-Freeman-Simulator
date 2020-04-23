@@ -1,10 +1,15 @@
+from Farmer import Farmer
+from Economy import Economy
+from Plot import Plot
+
+
 class Simulation(object):
 
     def __init__(self):
         self.__plotList = []
         self.__menu = 'main'
 
-    def main:
+    def main(self):
         command = 'help'
         self.get_family()
         while command != 'quit';

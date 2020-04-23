@@ -4,11 +4,20 @@ from Plot import Plot
 
 class Farmer(object):
 
-    def __init__(self):
-        self.__farmHands = 0
-        self.__family = 0
-        self.__money = 0
-        self.__totalPlots = []
+    def __init__(self, family, farmHands):
+        self.__farmHands = farmHands
+        self.__family = family
+        self.__money = 200
+        self.__totalPlots = ['plot', 'plot', 'plot', 'plot']
+
+    def __str__(self):
+        string = 'Family Members:'
+        string += f'\nTotal = {self.__family}'
+        string += f'\nWorkers = {self.__family - 1}'
+        string += f'\n\nFarm Hands = {self.__farmHands}'
+        string += f'\n\nMoney = {self.__money}'
+        string += f'\n\nPlots = {len(self.__totalPlots)}'
+        print(string)
 
     def hire_farmHands(self):
         """

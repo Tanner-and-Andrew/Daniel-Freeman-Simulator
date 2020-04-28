@@ -20,9 +20,9 @@ class Simulation(object):
             elif command == 'advance':
                 economy.advance()
             elif command == 'plant':
-                farmer.plant()
+                self.__farmer.plant()
             elif command == 'breed':
-                farmer.breed()
+                self.__farmer.breed()
             elif command == 'shop':
                 self.__menu = 'shop'
                 self.get_menu()

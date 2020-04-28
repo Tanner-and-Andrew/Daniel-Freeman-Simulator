@@ -40,6 +40,9 @@ class Farmer(object):
         if confirm:
             amount = toolbox.get_integer_between(1, self.__farmHands, "How many farm hands would you like to fire?: ")
             self.__farmHands = self.__farmHands - amount
+            if self.__farmHands < 0:
+                print("You don't have that many farm hands to fire.")
+                self._farmHands = self.__farmHands + amount
 
     def buy_plot(self):
         """

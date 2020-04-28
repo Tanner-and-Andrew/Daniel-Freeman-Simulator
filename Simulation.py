@@ -59,18 +59,7 @@ class Simulation(object):
                     'q': 'quit',
                     's': 'shop',
                     'f': 'farmhands',
-                    'l': 'land',
-
-
-                    'o': 'load',
-                    'h': 'help',
-                    '?': 'help',
-                    'g': 'change-display',
-                    'u': 'change-rules',
-                    'm': 'more',
-                    'b': 'back',
-                    'w': 'world-type',
-                    'q': 'quit'}
+                    'l': 'land',}
 
         validCommands = commands.keys()
 
@@ -105,10 +94,10 @@ class Simulation(object):
 
     def edit_farmhands(self):
         #hire or fire
-        if answer = 'h':
-            farmer.hire_farmHands()
-        if answer = 'f':
-            farmer.fire_farmHands()
+        if answer == 'h':
+            self.__farmer.hire_farmHands()
+        if answer == 'f':
+            self.__farmer.fire_farmHands()
 
     def get_family(self):
         """
@@ -130,10 +119,12 @@ class Simulation(object):
         self.__farmer = Farmer(family, farmHands)
 
     def print_family(self):
-        string = 'Family Size Options:'
+        string = '-----------------------'
+        string += 'Family Size Options:'
         string += '\n\n1.) No Children'
         string += '\n2.) Two Children'
         string += '\n3.) Three Children'
+        string += '-----------------------'
         return string
 
 

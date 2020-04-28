@@ -1,12 +1,15 @@
 from Farmer import Farmer
 from Economy import Economy
 from Plot import Plot
+import toolbox
+
 
 class Simulation(object):
 
     def __init__(self):
         self.__plotList = []
         self.__menu = 'main'
+        self.__farmer = None
 
     def main(self):
         command = 'help'
@@ -17,9 +20,9 @@ class Simulation(object):
             elif command == 'advance':
                 economy.advance()
             elif command == 'plant':
-                farmer.plant()
+                self.__farmer.plant()
             elif command == 'breed':
-                farmer.breed()
+                self.__farmer.breed()
             elif command == 'shop':
                 self.__menu = 'shop'
                 self.get_menu()
@@ -29,23 +32,9 @@ class Simulation(object):
                 self.edit_farmhands()
             elif command == 'land':
                 pass
-            elif command == 'change-display':
-                self.change_graphics(parameter)
-            elif command == 'save':
-                self.save(parameter, './worlds/')
-            elif command == 'load':
-                self.load(parameter, './worlds/')
-            elif command == 'more':
-                self.__menu = 'more'
-            elif command == 'back':
-                self.__menu = 'main'
-            elif command == 'world-type':
-                self.get_geometry()
-            elif command == 'change-rules':
-                self.change_rules(parameter)
             self.get_menu()
             self.__menu = 'main'
-            command = self.get_command()
+            command, parameter = self.get_command()
 
     def get_menu(self):
         """
@@ -107,20 +96,44 @@ class Simulation(object):
         hi = input("\n\npress <return> to continue")
 
 
-    def advance(self):
+    def advnace(self):
         """
         This will advance the simulation forward one year.
         :return: None
         """
         pass
 
-    """def edit_farmhands(self):
+    def edit_farmhands(self):
         #hire or fire
         if answer = 'h':
             farmer.hire_farmHands()
         if answer = 'f':
-            farmer.fire_farmHands()"""
+            farmer.fire_farmHands()
 
-if __name__ =='__main__':
-    simulation = Simulation()
-    simulation.main()
+    def get_family(self):
+        """
+        Asks the user what family size they want.
+        Chosen from three options.
+        :return:
+        """
+        self.print_family()
+        choice = toolbox.get_integer_between(1, 3, 'Which family size would you like? ')
+        if choice == 1:
+            family = 2
+            farmHands = 3
+        elif choice == 2:
+            family = 4
+            farmHands = 1
+        else:
+            family = 5
+            farmHands = 0
+        self.__farmer = Farmer(family, farmHands)
+
+    def print_family(self):
+        string = 'Family Size Options:'
+        string += '\n\n1.) No Children'
+        string += '\n2.) Two Children'
+        string += '\n3.) Three Children'
+        return string
+
+

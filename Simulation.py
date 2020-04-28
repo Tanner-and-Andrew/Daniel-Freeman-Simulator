@@ -2,7 +2,6 @@ from Farmer import Farmer
 from Economy import Economy
 from Plot import Plot
 
-
 class Simulation(object):
 
     def __init__(self):
@@ -12,7 +11,7 @@ class Simulation(object):
     def main(self):
         command = 'help'
         self.get_family()
-        while command != 'quit';
+        while command != 'quit':
             if command == 'help':
                 self.help('farmhelp.txt')
             elif command == 'advance':
@@ -44,9 +43,9 @@ class Simulation(object):
                 self.get_geometry()
             elif command == 'change-rules':
                 self.change_rules(parameter)
-        self.get_menu()
-        self.__menu = 'main'
-        command, parameter = self.get_command()
+            self.get_menu()
+            self.__menu = 'main'
+            command = self.get_command()
 
     def get_menu(self):
         """
@@ -108,16 +107,20 @@ class Simulation(object):
         hi = input("\n\npress <return> to continue")
 
 
-    def advnace(self):
+    def advance(self):
         """
         This will advance the simulation forward one year.
         :return: None
         """
         pass
 
-    def edit_farmhands(self):
+    """def edit_farmhands(self):
         #hire or fire
         if answer = 'h':
             farmer.hire_farmHands()
         if answer = 'f':
-            farmer.fire_farmHands()
+            farmer.fire_farmHands()"""
+
+if __name__ =='__main__':
+    simulation = Simulation()
+    simulation.main()

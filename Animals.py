@@ -1,6 +1,6 @@
 class Animals(object):
 
-    def __init__(self):
+    def __init__(self, type, price, product, productValue, sellValue):
         self.__type = type
         self.__price = price
         self.__product = product
@@ -16,7 +16,7 @@ class Animals(object):
     def get_product(self):
         return self.__product
 
-    def get_sellValue(self):
+    def get_productValue(self):
         return self.__productValue
 
     def get_sellValue(self):

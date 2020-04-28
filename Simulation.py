@@ -120,10 +120,12 @@ class Simulation(object):
 
     def print_family(self):
         string = '-----------------------'
-        string += 'Family Size Options:'
+        string += 'Family Size Options :'
         string += '\n\n1.) No Children'
         string += '\n2.) Two Children'
         string += '\n3.) Three Children'
+        string += '\n(Your starting children and farm hands will add up to 3 not counting you'
+        string += '\neg: option one will give you no children, but will assign you three farm hands.)'
         string += '-----------------------'
         return string
 

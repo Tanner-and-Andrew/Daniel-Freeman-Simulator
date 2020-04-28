@@ -60,4 +60,3 @@ class Farmer(object):
                 print("You don't have enough money to make this purchase.")
             else:
                 self.__totalPlots.append('plot')
-

@@ -1,6 +1,7 @@
 from Farmer import Farmer
 from Economy import Economy
 from Plot import Plot
+import toolbox
 
 
 class Simulation(object):
@@ -8,11 +9,12 @@ class Simulation(object):
     def __init__(self):
         self.__plotList = []
         self.__menu = 'main'
+        self.__farmer = None
 
     def main(self):
         command = 'help'
         self.get_family()
-        while command != 'quit';
+        while command != 'quit':
             if command == 'help':
                 self.help('farmhelp.txt')
             elif command == 'advance':
@@ -30,23 +32,9 @@ class Simulation(object):
                 self.edit_farmhands()
             elif command == 'land':
                 pass
-            elif command == 'change-display':
-                self.change_graphics(parameter)
-            elif command == 'save':
-                self.save(parameter, './worlds/')
-            elif command == 'load':
-                self.load(parameter, './worlds/')
-            elif command == 'more':
-                self.__menu = 'more'
-            elif command == 'back':
-                self.__menu = 'main'
-            elif command == 'world-type':
-                self.get_geometry()
-            elif command == 'change-rules':
-                self.change_rules(parameter)
-        self.get_menu()
-        self.__menu = 'main'
-        command, parameter = self.get_command()
+            self.get_menu()
+            self.__menu = 'main'
+            command, parameter = self.get_command()
 
     def get_menu(self):
         """
@@ -121,3 +109,31 @@ class Simulation(object):
             farmer.hire_farmHands()
         if answer = 'f':
             farmer.fire_farmHands()
+
+    def get_family(self):
+        """
+        Asks the user what family size they want.
+        Chosen from three options.
+        :return:
+        """
+        self.print_family()
+        choice = toolbox.get_integer_between(1, 3, 'Which family size would you like? ')
+        if choice == 1:
+            family = 2
+            farmHands = 3
+        elif choice == 2:
+            family = 4
+            farmHands = 1
+        else:
+            family = 5
+            farmHands = 0
+        self.__farmer = Farmer(family, farmHands)
+
+    def print_family(self):
+        string = 'Family Size Options:'
+        string += '\n\n1.) No Children'
+        string += '\n2.) Two Children'
+        string += '\n3.) Three Children'
+        return string
+
+

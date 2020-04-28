@@ -14,6 +14,7 @@ class Farmer(object):
         string = 'Family Members:'
         string += f'\nTotal = {self.__family}'
         string += f'\nWorkers = {self.__family - 1}'
+        string += '\n\nOthers:'
         string += f'\n\nFarm Hands = {self.__farmHands}'
         string += f'\n\nMoney = {self.__money}'
         string += f'\n\nPlots = {len(self.__totalPlots)}'

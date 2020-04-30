@@ -90,7 +90,6 @@ class Simulation(object):
         This will advance the simulation forward one year.
         :return: None
         """
-        pass
 
     def edit_farmhands(self):
         self.print_farmHand_options()

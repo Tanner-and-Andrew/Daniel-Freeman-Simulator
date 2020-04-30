@@ -78,3 +78,9 @@ class Farmer(object):
 
     def get_farmHands(self):
         return self.__farmHands
+
+    def get_family(self):
+        return self.__family
+
+    def get_money(self):
+        return self.__money

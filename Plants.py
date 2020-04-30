@@ -1,10 +1,12 @@
 class Plants(object):
 
-    def __init__(self, type, price, risk, sellValue):
+    def __init__(self, type, price, risk, sellValue, lowerLimit, upperLimit):
         self.__type = type
         self.__price = price
         self.__risk = risk
         self.__sellValue = sellValue
+        self.__lowerLimit = lowerLimit
+        self.__upperLimit = upperLimit
 
     def get_type(self):
         return self.__type

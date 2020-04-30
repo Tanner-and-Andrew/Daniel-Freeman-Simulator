@@ -1,5 +1,7 @@
 from Farmer import Farmer
 from Economy import Economy
+from Plants import Plants
+from Animals import Animals
 from Plot import Plot
 import toolbox
 
@@ -10,6 +12,11 @@ class Simulation(object):
         self.__plotList = []
         self.__menu = 'main'
         self.__farmer = None
+        self.__economy = Economy()
+        self.__plants = []
+        self.read_plants('plants.csv')
+        self.__animals = []
+        self.read_animals('animals.csv')
 
     def main(self):
         command = 'help'
@@ -84,8 +91,45 @@ class Simulation(object):
             input('\n' + prompt)
         hi = input("\n\npress <return> to continue")
 
+    def read_plants(self, filename):
+        """Read in all plants from the file and add them to
+           the list of plants."""
+        with open(filename, 'r') as plantsFile:
+            for line in plantsFile:
+                type, price, risk, sellValue, lowerLimit, upperLimit = line.split(',')
+                type = type.strip()
+                price = price.strip()
+                risk = risk.strip()
+                sellValue = sellValue.strip()
+                lowerLimit = lowerLimit.strip()
+                upperLimit = upperLimit.strip
+                """if type not in Product.productTypes:
+                    raise ValueError(f'{name}: product type cannot be "{type}". Check {filename}.')"""
+                if not toolbox.is_number(price):
+                    raise ValueError(f'{type}: plant price must be a number. Check {filename}.')
+                plant = Plants(type, float(price), int(risk), float(sellValue), float(lowerLimit), float(upperLimit))
+                self.__plants.append(plant)
 
-    def advnace(self):
+    def read_animals(self, filename):
+        """Read in all animals from the file and add them to
+           the list of animals."""
+        with open(filename, 'r') as animalsFile:
+            for line in animalsFile:
+                type, price, product, productValue, sellValue = line.split(',')
+                type = type.strip()
+                price = price.strip()
+                product = product.strip()
+                productValue = productValue.strip()
+                sellValue = sellValue.strip()
+                """if type not in Product.productTypes:
+                    raise ValueError(f'{name}: product type cannot be "{type}". Check {filename}.')"""
+                if not toolbox.is_number(price):
+                    raise ValueError(f'{type}: animal price must be a number. Check {filename}.')
+                animal = Animals(type, float(price), product, float(productValue), float(sellValue))
+                self.__animals.append(animal)
+
+
+    def advance(self):
         """
         This will advance the simulation forward one year.
         :return: None

@@ -60,3 +60,18 @@ class Farmer(object):
                 print("You don't have enough money to make this purchase.")
             else:
                 self.__totalPlots.append('plot')
+
+    def sell_plot(self):
+        """
+        Sells a plot of land chosen by the user.
+        Remove that plot from the list.
+        Gives money depending on the value of the land.
+        :return: None
+        """
+        plotPrice = 25
+        whichPlot = toolbox.get_integer_between(1, len(self.__totalPlots), "Which plot would you like to sell? ")
+        whichPlot = whichPlot - 1
+        confirm = toolbox.get_boolean("Are you sure you want to sell this plot?")
+        if confirm:
+            self.__totalPlots.pop(whichPlot)
+            self.__money = self.__money + plotPrice

@@ -19,5 +19,12 @@ class Plot(object):
         self.__animals = []
         self.read_animals('animals.csv')
 
+    def get_type(self):
+        return self.__type
 
+    def get_contents(self):
+        return self.__contents
+
+    def check_isempty(self):
+        return self.__isempty
 

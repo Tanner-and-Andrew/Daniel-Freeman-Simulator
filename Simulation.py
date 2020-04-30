@@ -2,7 +2,6 @@ from Farmer import Farmer
 from Economy import Economy
 from Plants import Plants
 from Animals import Animals
-from Plot import Plot
 import toolbox
 
 
@@ -134,6 +133,7 @@ class Simulation(object):
         This will advance the simulation forward one year.
         :return: None
         """
+        self.__economy.run()
 
     def edit_farmhands(self):
         self.print_farmHand_options()

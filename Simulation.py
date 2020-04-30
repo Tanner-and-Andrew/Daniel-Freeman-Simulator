@@ -93,11 +93,25 @@ class Simulation(object):
         pass
 
     def edit_farmhands(self):
-        #hire or fire
-        if answer == 'h':
+        self.print_farmHand_options()
+        answer = toolbox.get_integer_between(1, 2, "Which option? ")
+        if answer == 2:
             self.__farmer.hire_farmHands()
-        if answer == 'f':
+        if answer == 1:
             self.__farmer.fire_farmHands()
+
+    def print_farmHand_options(self):
+        """
+        Returns a string that shows the user the fire/hire choice.
+        :return: String
+        """
+        string = '------------------------------'
+        string += f'\nTotal Farm Hands: {self.__farmer.get_farmHands()}'
+        string += '\nOptions:'
+        string += '\n-----------------------------'
+        string += '\n1.) Fire'
+        string += '\n2.) Hire'
+        return string
 
     def get_family(self):
         """

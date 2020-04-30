@@ -75,3 +75,6 @@ class Farmer(object):
         if confirm:
             self.__totalPlots.pop(whichPlot)
             self.__money = self.__money + plotPrice
+
+    def get_farmHands(self):
+        return self.__farmHands

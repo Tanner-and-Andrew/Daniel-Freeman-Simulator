@@ -18,7 +18,8 @@ class Simulation(object):
         self.__economy = Economy(self.__animals, self.__plants)
 
     def main(self):
-        command = 'help'
+        #self.help()
+        command = ''
         self.get_family()
         while command != 'quit':
             if command == 'help':
@@ -40,7 +41,7 @@ class Simulation(object):
                 pass
             self.get_menu()
             self.__menu = 'main'
-            command, parameter = self.get_command()
+            command = self.get_command()
 
     def get_menu(self):
         """

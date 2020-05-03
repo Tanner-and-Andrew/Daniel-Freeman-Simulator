@@ -14,10 +14,10 @@ class Plot(object):
         self.__count = 0
         self.__owned = False
         self.__isempty = True
-        self.__plants = []
-        self.read_plants('plants.csv')
-        self.__animals = []
-        self.read_animals('animals.csv')
+        #self.__plants = []
+        #self.read_plants('plants.csv')
+        #self.__animals = []
+        #self.read_animals('animals.csv')
 
     def get_type(self):
         return self.__type

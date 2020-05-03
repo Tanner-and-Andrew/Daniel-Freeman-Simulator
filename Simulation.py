@@ -132,7 +132,10 @@ class Simulation(object):
         whichPlot = self.__farmer.get_plot()
         string = '=================================================='
         for plants in self.__plants:
-
+            string = f'**   {productNumber:2.0f}: {product.get_name():<30} '
+            string += f'${product.get_price():0.2f}/lb'
+            print(string)
+            productNumber += 1
 
     def advance(self):
         """

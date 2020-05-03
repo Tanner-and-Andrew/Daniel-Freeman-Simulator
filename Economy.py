@@ -32,11 +32,17 @@ class Economy(object):
                 sellValue = upperLimit
         Plants.set_sellValue(sellValue)
 
-    def print_farm_report():
+    def print_farm_report(self):
         self.__year += 1
         string = "################################################################################################\n"
         string += f"                               ANNUAL FARM REPORT: {self.__year}\n"
-        string += "################################################################################################\n"
+        string += "################################################################################################\n\n"
+        for plant in self.__plants:
+            string += f"{Plants.get_type()}: ${Plants.get_sellValue()} per bushel\n\n"
+        for animal in self.__animals:
+            string += f"{Animals.get_type()}-\n     {Animals.get_product()}: ${Animals.get_productValue()} per pound"
+            string += f"\n     Price per {Animals.get_type()}: ${Animals.get_sellValue()}"
+        print(string)
 
 
 

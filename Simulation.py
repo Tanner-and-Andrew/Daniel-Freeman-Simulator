@@ -11,11 +11,11 @@ class Simulation(object):
         self.__plotList = []
         self.__menu = 'main'
         self.__farmer = None
-        self.__economy = Economy(animals, plants)
         self.__plants = []
         self.read_plants('plants.csv')
         self.__animals = []
         self.read_animals('animals.csv')
+        self.__economy = Economy(self.__animals, self.__plants)
 
     def main(self):
         command = 'help'
@@ -24,7 +24,7 @@ class Simulation(object):
             if command == 'help':
                 self.help('farmhelp.txt')
             elif command == 'advance':
-                economy.advance()
+                self.__economy.advance()
             elif command == 'plant':
                 self.plant()
             elif command == 'breed':
@@ -106,7 +106,7 @@ class Simulation(object):
                     raise ValueError(f'{name}: product type cannot be "{type}". Check {filename}.')"""
                 if not toolbox.is_number(price):
                     raise ValueError(f'{type}: plant price must be a number. Check {filename}.')
-                plant = Plants(type, float(price), int(risk), float(sellValue), float(lowerLimit), float(upperLimit))
+                plant = Plants(type, price, int(risk), sellValue, lowerLimit, upperLimit)
                 self.__plants.append(plant)
 
     def read_animals(self, filename):
@@ -185,7 +185,7 @@ class Simulation(object):
         self.__farmer = Farmer(family, farmHands)
 
     def print_family(self):
-        string = '-----------------------'
+        string = '-----------------------\n'
         string += 'Family Size Options :'
         string += '\n\n1.) No Children'
         string += '\n2.) Two Children'
@@ -193,7 +193,10 @@ class Simulation(object):
         string += '\n(Your starting children and farm hands will add up to 3, not counting you,'
         string += '\nto account for the four plots that need to be worked on initially.'
         string += '\neg: option one will give you no children, but will assign you three farm hands.)'
-        string += '-----------------------'
-        return string
+        string += '\n-----------------------\n'
+        print(string)
 
 
+if __name__ == "__main__":
+    simulation = Simulation()
+    simulation.main()

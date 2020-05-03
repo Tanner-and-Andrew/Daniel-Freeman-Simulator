@@ -81,7 +81,7 @@ class Farmer(object):
         whichPlot = whichPlot - 1
         return whichPlot
 
-    def plant(self, plant, whichPlot):
+    #def plant(self, plant, whichPlot):
 
     def get_farmHands(self):
         return self.__farmHands

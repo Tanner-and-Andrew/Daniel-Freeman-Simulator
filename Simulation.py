@@ -26,7 +26,7 @@ class Simulation(object):
             elif command == 'advance':
                 economy.advance()
             elif command == 'plant':
-                self.__farmer.plant()
+                self.plant()
             elif command == 'breed':
                 self.__farmer.breed()
             elif command == 'shop':
@@ -128,6 +128,12 @@ class Simulation(object):
                 self.__animals.append(animal)
 
 
+    def plant(self):
+        whichPlot = self.__farmer.get_plot()
+        string = '=================================================='
+        for plants in self.__plants:
+
+
     def advance(self):
         """
         This will advance the simulation forward one year.
@@ -181,7 +187,8 @@ class Simulation(object):
         string += '\n\n1.) No Children'
         string += '\n2.) Two Children'
         string += '\n3.) Three Children'
-        string += '\n(Your starting children and farm hands will add up to 3 not counting you'
+        string += '\n(Your starting children and farm hands will add up to 3, not counting you,'
+        string += '\nto account for the four plots that need to be worked on initially.'
         string += '\neg: option one will give you no children, but will assign you three farm hands.)'
         string += '-----------------------'
         return string

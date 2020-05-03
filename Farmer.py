@@ -76,6 +76,13 @@ class Farmer(object):
             self.__totalPlots.pop(whichPlot)
             self.__money = self.__money + plotPrice
 
+    def get_plot(self):
+        whichPlot = toolbox.get_integer_between(1, len(self.__totalPlots), "Which plot would you like to plant on? ")
+        whichPlot = whichPlot - 1
+        return whichPlot
+
+    def plant(self, plant, whichPlot):
+
     def get_farmHands(self):
         return self.__farmHands
 

@@ -9,7 +9,7 @@ class Plot(object):
     def __init__(self):
         self.__type = type
         #animal or crop
-        self.__contents = 'EMPTY'
+        self.__contents = ''
         #specific crop
         self.__count = 0
         self.__owned = False
@@ -19,19 +19,12 @@ class Plot(object):
         self.__animals = []
         self.read_animals('animals.csv')
 
-    def __str__(self):
-        print(f""" __________________________
-                  |                          |
-                  |                          | 
-                  |                          |
-                  |                          | 
-                  |        {self.__contents}                  |
-                  |                          | 
-                  |                          |
-                  |                          | 
-                  |                          |
-                  | _________________________| 
-        """)
+    def get_type(self):
+        return self.__type
 
+    def get_contents(self):
+        return self.__contents
 
+    def check_isempty(self):
+        return self.__isempty
 

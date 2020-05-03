@@ -8,7 +8,7 @@ class Farmer(object):
         self.__farmHands = farmHands
         self.__family = family
         self.__money = 200
-        self.__totalPlots = ['plot', 'plot', 'plot', 'plot']
+        self.__totalPlots = [Plot(), Plot(), Plot(), Plot()]
 
     def __str__(self):
         string = 'Family Members:'
@@ -59,7 +59,7 @@ class Farmer(object):
                 self.__money = self.__money + plotPrice
                 print("You don't have enough money to make this purchase.")
             else:
-                self.__totalPlots.append('plot')
+                self.__totalPlots.append(Plot())
 
     def sell_plot(self):
         """
@@ -78,3 +78,12 @@ class Farmer(object):
 
     def get_farmHands(self):
         return self.__farmHands
+
+    def get_family(self):
+        return self.__family
+
+    def get_money(self):
+        return self.__money
+
+    def get_totalPlots(self):
+        return len(self.__totalPlots)

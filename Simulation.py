@@ -12,7 +12,7 @@ class Simulation(object):
         self.__plotList = []
         self.__menu = 'main'
         self.__farmer = None
-        self.__economy = Economy()
+        self.__economy = Economy(animals, plants)
         self.__plants = []
         self.read_plants('plants.csv')
         self.__animals = []

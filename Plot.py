@@ -28,3 +28,18 @@ class Plot(object):
     def check_isempty(self):
         return self.__isempty
 
+    def __str__(self):
+        print(f"""    __________________________
+                     |                          |
+                     |                          | 
+                     |                          |
+                     |                          | 
+                     |        {self.__contents}                  |
+                     |                          | 
+                     |                          |
+                     |                          | 
+                     |                          |
+                     | _________________________| 
+           """)
+
+

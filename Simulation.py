@@ -131,11 +131,14 @@ class Simulation(object):
     def plant(self):
         whichPlot = self.__farmer.get_plot()
         string = '=================================================='
+        plantNumber = 1
         for plants in self.__plants:
-            string = f'**   {productNumber:2.0f}: {product.get_name():<30} '
-            string += f'${product.get_price():0.2f}/lb'
+            string = f'==   {plantNumber}=  {plants.get_type()}  Price:{plants.get_price()}  '
+            string += f'Chance of Success: {plants.get_risk()}%'
             print(string)
-            productNumber += 1
+            plantNumber += 1
+        plantType = toolbox.get_integer_between(1, plantNumber, "Which crop do you want to plant? ")
+        self.__farmer.plant(whichPlot, plantType)
 
     def advance(self):
         """

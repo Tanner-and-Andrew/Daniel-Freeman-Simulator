@@ -19,6 +19,10 @@ class Plot(object):
         self.__animals = []
         self.read_animals('animals.csv')
 
+    def set_plant(self, plant):
+        self.__contents = plant
+        self.__type = 'crop'
+
     def get_type(self):
         return self.__type
 

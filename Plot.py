@@ -22,6 +22,13 @@ class Plot(object):
     def set_plant(self, plant):
         self.__contents = plant
         self.__type = 'crop'
+        self.__isempty = False
+
+
+    def set_animal(self, animal):
+        self.__contents = animal
+        self.__type = 'animal'
+        self.__isempty = False
 
     def get_type(self):
         return self.__type

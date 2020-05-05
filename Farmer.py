@@ -84,6 +84,9 @@ class Farmer(object):
     def plant(self, whichPlot, plant):
         self.__totalPlots[whichPlot].set_plant(plant)
 
+    def import_animal(self, whichPlot, animal):
+        self.__totalPlots[whichPlot].set_animal(animal)
+
     def get_farmHands(self):
         return self.__farmHands
 

@@ -12,7 +12,7 @@ class Plants(object):
         return self.__type
 
     def get_price(self):
-        return self.__price
+        return float(self.__price)
 
     def get_risk(self):
         return self.__risk

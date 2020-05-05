@@ -134,7 +134,7 @@ class Simulation(object):
         print('==================================================')
         plantNumber = 1
         for plants in self.__plants:
-            string = f'==   {plantNumber}=  {plants.get_type()}  Price:{plants.get_price()}  '
+            string = f'==   {plantNumber}=  {plants.get_type()}  Price: ${plants.get_price():0.2f}  '
             string += f'Chance of Success: {plants.get_risk()}%'
             print(string)
             plantNumber += 1
@@ -148,7 +148,7 @@ class Simulation(object):
         print('==================================================')
         animalNumber = 1
         for animal in self.__animals:
-            string = f'==   {animalNumber}=  {animal.get_type()}  Price: {animal.get_price()}  '
+            string = f'==   {animalNumber}=  {animal.get_type()}  Price: {animal.get_price():0.2f}  '
             string += f' Product: {animal.get_product()}  Earnings: {animal.get_productValue}'
             print(string)
             animalNumber += 1

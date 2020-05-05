@@ -38,21 +38,35 @@ class Plot(object):
     def get_contents(self):
         return self.__contents
 
+    def get_owned(self):
+        return self.__owned
+
+    def set_contents(self, contents):
+        self.__contents = contents
+
     def check_isempty(self):
         return self.__isempty
 
     def __str__(self):
-        print(f"""    __________________________
-                     |                          |
-                     |                          | 
-                     |                          |
-                     |                          | 
-                     |        {self.__contents}                  |
-                     |                          | 
-                     |                          |
-                     |                          | 
-                     |                          |
-                     | _________________________| 
+        print(f"""  
+ ________________
+|                |
+|                | 
+|     {self.__contents}      |
+|                | 
+|                |
+|________________| 
            """)
+
+    def print_plot(self):
+        return f"""  
+ ________________
+|                |
+|                | 
+|     {self.__contents}      |
+|                | 
+|                |
+|________________| 
+           """
 
 

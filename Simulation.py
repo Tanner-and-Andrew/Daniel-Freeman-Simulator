@@ -2,13 +2,14 @@ from Farmer import Farmer
 from Economy import Economy
 from Plants import Plants
 from Animals import Animals
+from Plot import Plot
 import toolbox
 
 
 class Simulation(object):
 
     def __init__(self):
-        self.__plotList = []
+        self.__plotList = [Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot()]
         self.__menu = 'main'
         self.__farmer = None
         self.__plants = []
@@ -21,6 +22,7 @@ class Simulation(object):
         #self.help()
         command = ''
         self.get_family()
+        self.show_plots()
         while command != 'quit':
             if command == 'help':
                 self.help('farmhelp.txt')
@@ -39,6 +41,8 @@ class Simulation(object):
                 self.edit_farmhands()
             elif command == 'land':
                 pass
+            #self.__farmer.show_plots()
+            self.show_plots()
             self.get_menu()
             self.__menu = 'main'
             command = self.get_command()
@@ -66,7 +70,7 @@ class Simulation(object):
                     'q': 'quit',
                     's': 'shop',
                     'f': 'farmhands',
-                    'l': 'land',}
+                    'l': 'land'}
 
         validCommands = commands.keys()
 
@@ -139,7 +143,8 @@ class Simulation(object):
             print(string)
             plantNumber += 1
         print('==================================================')
-        plantType = toolbox.get_integer_between(1, plantNumber, "Which crop do you want to plant? ")
+        numberOfCrops = len(self.__plants)
+        plantType = toolbox.get_integer_between(1, numberOfCrops, "Which crop do you want to plant? ")
         plant = self.__plants[plantType-1][0]
         self.__farmer.plant(whichPlot, plant)
 
@@ -215,6 +220,30 @@ class Simulation(object):
         string += '\neg: option one will give you no children, but will assign you three farm hands.)'
         string += '\n-----------------------\n'
         print(string)
+
+    def show_plots(self):
+        contentList = []
+        for plot in self.__plotList:
+            if plot.get_owned() == False:
+                plot.set_contents("For Sale")
+            contentList.append(plot.get_contents())
+        string = f"""
+ ________________             ________________
+|                |                            |
+|                |                            | 
+|     {contentList[0]}      |     {contentList[1]}      |
+|                |                            | 
+|                |                            |
+|________________|            ________________| 
+
+
+
+
+
+
+"""
+        print(string)
+
 
 
 if __name__ == "__main__":

@@ -16,7 +16,7 @@ class Economy(object):
 
     def run(self):
         self.randomize_plants()
-        self.randomize_animals()
+        #self.randomize_animals()
         self.print_farm_report()
         self.print_results()
 

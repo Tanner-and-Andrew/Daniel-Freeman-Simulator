@@ -24,11 +24,13 @@ class Plot(object):
         self.__type = 'crop'
         self.__isempty = False
 
-
     def set_animal(self, animal):
         self.__contents = animal
         self.__type = 'animal'
         self.__isempty = False
+
+    def set_owned(self):
+        self.__owned = True
 
     def get_type(self):
         return self.__type

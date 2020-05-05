@@ -156,7 +156,6 @@ class Simulation(object):
         animalType = toolbox.get_integer_between(1, animalNumber, "Which crop do you want to plant? ")
         animal = self.__animals[animalType-1][0]
         self.__farmer.import_animal(whichPlot, animal)
-        #
 
     def advance(self):
         """

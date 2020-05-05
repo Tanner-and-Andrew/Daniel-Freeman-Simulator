@@ -228,7 +228,7 @@ class Simulation(object):
                 plot.set_contents("For Sale")
             contentList.append(plot.get_contents())
         string = f"""
- ________________             ________________
+ ________________            ________________
 |                |                            |
 |                |                            | 
 |     {contentList[0]}      |     {contentList[1]}      |

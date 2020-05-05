@@ -131,15 +131,29 @@ class Simulation(object):
 
     def plant(self):
         whichPlot = self.__farmer.get_plot()
-        string = '=================================================='
+        print('==================================================')
         plantNumber = 1
         for plants in self.__plants:
             string = f'==   {plantNumber}=  {plants.get_type()}  Price:{plants.get_price()}  '
             string += f'Chance of Success: {plants.get_risk()}%'
             print(string)
             plantNumber += 1
+        print('==================================================')
         plantType = toolbox.get_integer_between(1, plantNumber, "Which crop do you want to plant? ")
         self.__farmer.plant(whichPlot, plantType)
+
+    def import_animal(self):
+        whichPlot = self.__farmer.get_plot()
+        print('==================================================')
+        animalNumber = 1
+        for animal in self.__animals:
+            string = f'==   {animalNumber}=  {animal.get_type()}  Price:{animal.get_price()}  '
+            string += f' {}'
+            print(string)
+            animalNumber += 1
+        print('==================================================')
+        animalType = toolbox.get_integer_between(1, animalNumber, "Which crop do you want to plant? ")
+        self.__farmer.plant(whichPlot, animalType)
 
     def advance(self):
         """

@@ -8,8 +8,10 @@ class Farmer(object):
         self.__farmHands = farmHands
         self.__family = family
         self.__money = 200
-        self.__totalPlots = [Plot(), Plot(), Plot(), Plot()]
-        self.set_owned(self)
+        self.__totalPlots = [Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(),
+                             Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(),
+                             Plot(), Plot(), Plot(), Plot()]
+        self.set_owned()
 
     def __str__(self):
         string = 'Family Members:'
@@ -23,7 +25,7 @@ class Farmer(object):
 
     def set_owned(self):
         for plot in self.__totalPlots:
-            plot.set_owned()
+            plot.set_owned(True)
 
     def hire_farmHands(self):
         """
@@ -64,8 +66,11 @@ class Farmer(object):
                 self.__money = self.__money + plotPrice
                 print("You don't have enough money to make this purchase.")
             else:
-                self.__totalPlots.append(Plot())
-                self.__totalPlots[-1].set_owned()
+                counter = 0
+                for plots in self.__totalPlots:
+                    if plots.get_owned() == True:
+                        counter += 1
+                self.__totalPlots[counter].set_owned(True)
 
     def sell_plot(self):
         """
@@ -102,5 +107,8 @@ class Farmer(object):
     def get_money(self):
         return self.__money
 
-    def get_totalPlots(self):
+    def get_totalPlots_length(self):
         return len(self.__totalPlots)
+
+    def get_totalPlots(self):
+        return self.__totalPlots

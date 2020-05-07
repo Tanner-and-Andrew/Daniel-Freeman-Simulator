@@ -18,7 +18,7 @@ class Plants(object):
         return self.__risk
 
     def get_sellValue(self):
-        return self.__sellValue
+        return float(self.__sellValue)
 
     def get___lowerLimit(self):
         return self.____lowerLimit

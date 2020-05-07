@@ -17,7 +17,7 @@ class Animals(object):
         return self.__product
 
     def get_productValue(self):
-        return self.__productValue
+        return float(self.__productValue)
 
     def get_sellValue(self):
         return self.__sellValue

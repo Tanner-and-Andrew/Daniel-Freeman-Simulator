@@ -29,8 +29,8 @@ class Plot(object):
         self.__type = 'animal'
         self.__isempty = False
 
-    def set_owned(self):
-        self.__owned = True
+    def set_owned(self, para):
+        self.__owned = para
 
     def get_type(self):
         return self.__type

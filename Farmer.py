@@ -24,8 +24,9 @@ class Farmer(object):
         print(string)
 
     def set_owned(self):
-        for plot in self.totalPlots:
-            plot.set_owned(True)
+        counter = 0
+        while counter < 4:
+            self.totalPlots[counter].set_owned(True)
 
     def hire_farmHands(self):
         """

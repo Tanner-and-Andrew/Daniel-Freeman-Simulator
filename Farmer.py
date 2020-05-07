@@ -8,7 +8,7 @@ class Farmer(object):
         self.__farmHands = farmHands
         self.__family = family
         self.__money = 200
-        self.__totalPlots = [Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(),
+        self.totalPlots = [Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(),
                              Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(),
                              Plot(), Plot(), Plot(), Plot()]
         self.set_owned()
@@ -20,11 +20,11 @@ class Farmer(object):
         string += '\n\nOthers:'
         string += f'\n\nFarm Hands = {self.__farmHands}'
         string += f'\n\nMoney = {self.__money}'
-        string += f'\n\nPlots = {len(self.__totalPlots)}'
+        string += f'\n\nPlots = {len(self.totalPlots)}'
         print(string)
 
     def set_owned(self):
-        for plot in self.__totalPlots:
+        for plot in self.totalPlots:
             plot.set_owned(True)
 
     def hire_farmHands(self):
@@ -49,12 +49,12 @@ class Farmer(object):
             self.__farmHands = self.__farmHands - amount
             if self.__farmHands < 0:
                 print("You don't have that many farm hands to fire.")
-                self._farmHands = self.__farmHands + amount
+                self.__farmHands = self.__farmHands + amount
 
     def buy_plot(self):
         """
         Purchases another plot of land for the farmer to use.
-        Adds a plot to self.__totalPlots.
+        Makes a new plot True.
         Subtracts the price from self.__money.
         :return: None
         """
@@ -67,36 +67,39 @@ class Farmer(object):
                 print("You don't have enough money to make this purchase.")
             else:
                 counter = 0
-                for plots in self.__totalPlots:
-                    if plots.get_owned() == True:
+                for plots in self.totalPlots:
+                    if plots.get_owned():
                         counter += 1
-                self.__totalPlots[counter].set_owned(True)
+                self.totalPlots[counter].set_owned(True)
 
     def sell_plot(self):
         """
         Sells a plot of land chosen by the user.
-        Remove that plot from the list.
+        Change that plot to be False.
         Gives money depending on the value of the land.
         :return: None
         """
         plotPrice = 25
-        whichPlot = toolbox.get_integer_between(1, len(self.__totalPlots), "Which plot would you like to sell? ")
+        whichPlot = toolbox.get_integer_between(1, len(self.totalPlots), "Which plot would you like to sell? ")
         whichPlot = whichPlot - 1
         confirm = toolbox.get_boolean("Are you sure you want to sell this plot?")
         if confirm:
-            self.__totalPlots.pop(whichPlot)
-            self.__money = self.__money + plotPrice
+            counter = 0
+            for plots in self.totalPlots:
+                if plots.get_owned():
+                    counter += 1
+            self.totalPlots[counter-1].set_owned(False)
 
     def get_plot(self):
-        whichPlot = toolbox.get_integer_between(1, len(self.__totalPlots), "Which plot would you like to plant on? ")
+        whichPlot = toolbox.get_integer_between(1, len(self.totalPlots), "Which plot would you like to plant on? ")
         whichPlot = whichPlot - 1
         return whichPlot
 
     def plant(self, whichPlot, plant):
-        self.__totalPlots[whichPlot].set_plant(plant)
+        self.totalPlots[whichPlot].set_plant(plant)
 
     def import_animal(self, whichPlot, animal):
-        self.__totalPlots[whichPlot].set_animal(animal)
+        self.totalPlots[whichPlot].set_animal(animal)
 
     def get_farmHands(self):
         return self.__farmHands
@@ -108,7 +111,7 @@ class Farmer(object):
         return self.__money
 
     def get_totalPlots_length(self):
-        return len(self.__totalPlots)
+        return len(self.totalPlots)
 
     def get_totalPlots(self):
-        return self.__totalPlots
+        return self.totalPlots

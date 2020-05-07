@@ -9,7 +9,7 @@ import toolbox
 class Simulation(object):
 
     def __init__(self):
-        self.__plotList = [Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot()]
+        self.__plotList = [True, True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
         self.__menu = 'main'
         self.__farmer = None
         self.__plants = []
@@ -223,18 +223,46 @@ class Simulation(object):
 
     def show_plots(self):
         contentList = []
-        for plot in self.__plotList:
+        for plot in self.__farmer.get_totalPlots:
             if plot.get_owned() == False:
                 plot.set_contents("For Sale")
             contentList.append(plot.get_contents())
         string = f"""
- ________________            ________________
-|                |                            |
-|                |                            | 
-|     {contentList[0]}      |     {contentList[1]}      |
-|                |                            | 
-|                |                            |
-|________________|            ________________| 
+ ________________ ________________ ________________ ________________ 
+|                |                |                |                |        
+|                |                |                |                |
+|    {contentList[0]}    |    {contentList[1]}    |    {contentList[2]}    |    {contentList[3]}    |
+|                |                |                |                |
+|                |                |                |                |
+|________________|________________|________________|________________|
+ ________________ ________________ ________________ ________________ 
+|                |                |                |                |        
+|                |                |                |                |
+|    {contentList[4]}    |    {contentList[5]}    |    {contentList[6]}    |    {contentList[7]}    |
+|                |                |                |                |
+|                |                |                |                |
+|________________|________________|________________|________________|
+ ________________ ________________ ________________ ________________ 
+|                |                |                |                |        
+|                |                |                |                |
+|    {contentList[8]}    |    {contentList[9]}    |    {contentList[10]}    |    {contentList[11]}    |
+|                |                |                |                |
+|                |                |                |                |
+|________________|________________|________________|________________|
+ ________________ ________________ ________________ ________________ 
+|                |                |                |                |        
+|                |                |                |                |
+|    {contentList[12]}    |    {contentList[13]}    |    {contentList[14]}    |    {contentList[15]}    |
+|                |                |                |                |
+|                |                |                |                |
+|________________|________________|________________|________________|
+ ________________ ________________ ________________ ________________ 
+|                |                |                |                |        
+|                |                |                |                |
+|    {contentList[16]}    |    {contentList[17]}    |    {contentList[18]}    |    {contentList[19]}    |
+|                |                |                |                |
+|                |                |                |                |
+|________________|________________|________________|________________|
 
 
 

@@ -223,7 +223,8 @@ class Simulation(object):
 
     def show_plots(self):
         contentList = []
-        for plot in self.__farmer.get_totalPlots:
+        plotList = self.__farmer.totalPlots
+        for plot in plotList:
             if plot.get_owned() == False:
                 plot.set_contents("For Sale")
             contentList.append(plot.get_contents())
@@ -231,35 +232,35 @@ class Simulation(object):
  ________________ ________________ ________________ ________________ 
 |                |                |                |                |        
 |                |                |                |                |
-|    {contentList[0]}    |    {contentList[1]}    |    {contentList[2]}    |    {contentList[3]}    |
+|{contentList[0]:^16}|{contentList[1]:^16}|{contentList[2]:^16}|{contentList[3]:^16}|
 |                |                |                |                |
 |                |                |                |                |
 |________________|________________|________________|________________|
  ________________ ________________ ________________ ________________ 
 |                |                |                |                |        
 |                |                |                |                |
-|    {contentList[4]}    |    {contentList[5]}    |    {contentList[6]}    |    {contentList[7]}    |
+|{contentList[4]:^16}|{contentList[5]:^16}|{contentList[6]:^16}|{contentList[7]:^16}|
 |                |                |                |                |
 |                |                |                |                |
 |________________|________________|________________|________________|
  ________________ ________________ ________________ ________________ 
 |                |                |                |                |        
 |                |                |                |                |
-|    {contentList[8]}    |    {contentList[9]}    |    {contentList[10]}    |    {contentList[11]}    |
+|{contentList[8]:^16}|{contentList[9]:^16}|{contentList[10]:^16}|{contentList[11]:^16}|
 |                |                |                |                |
 |                |                |                |                |
 |________________|________________|________________|________________|
  ________________ ________________ ________________ ________________ 
 |                |                |                |                |        
 |                |                |                |                |
-|    {contentList[12]}    |    {contentList[13]}    |    {contentList[14]}    |    {contentList[15]}    |
+|{contentList[12]:^16}|{contentList[13]:^16}|{contentList[14]:^16}|{contentList[15]:^16}|
 |                |                |                |                |
 |                |                |                |                |
 |________________|________________|________________|________________|
  ________________ ________________ ________________ ________________ 
 |                |                |                |                |        
 |                |                |                |                |
-|    {contentList[16]}    |    {contentList[17]}    |    {contentList[18]}    |    {contentList[19]}    |
+|{contentList[16]:^16}|{contentList[17]:^16}|{contentList[18]:^16}|{contentList[19]:^16}|
 |                |                |                |                |
 |                |                |                |                |
 |________________|________________|________________|________________|

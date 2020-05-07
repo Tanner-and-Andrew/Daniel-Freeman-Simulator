@@ -27,6 +27,7 @@ class Farmer(object):
         counter = 0
         while counter < 4:
             self.totalPlots[counter].set_owned(True)
+            counter += 1
 
     def hire_farmHands(self):
         """

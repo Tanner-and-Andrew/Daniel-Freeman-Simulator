@@ -97,7 +97,7 @@ class Farmer(object):
         for plots in self.totalPlots:
             if plots.get_owned():
                 counter += 1
-        whichPlot = toolbox.get_integer_between(1, counter, "Which plot would you like to plant on? ")
+        whichPlot = toolbox.get_integer_between(1, counter, "Which plot would you like to put this on? ")
         whichPlot = whichPlot - 1
         return whichPlot
 

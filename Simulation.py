@@ -35,6 +35,12 @@ class Simulation(object):
             elif command == 'shop':
                 self.__menu = 'shop'
                 self.get_menu()
+            elif command == 'report':
+                #if self.__economy.get_year() == 1849:
+                    #self.__economy.original_report()
+                #else:
+                self.__economy.print_farm_report()
+                answer = input("<Press RETURN to continue>")
             elif command == 'reset':
                 pass
             elif command == 'farmhands':
@@ -54,7 +60,7 @@ class Simulation(object):
         :return:
         """
         if self.__menu == 'main':
-            print("[A]dvance  [P]lant  [B]reed  [S]hop  [R]eset  [Q]uit")
+            print("[A]dvance  [P]lant  [B]reed  [S]hop  Last [Y]ear's Report  [R]eset  [Q]uit")
         if self.__menu == 'shop':
             print("Purchase: [F]armhands [L]and")
 
@@ -71,6 +77,7 @@ class Simulation(object):
                     'q': 'quit',
                     's': 'shop',
                     'f': 'farmhands',
+                    'y': 'report',
                     'l': 'land'}
 
         validCommands = commands.keys()
@@ -97,7 +104,7 @@ class Simulation(object):
         hi = input("\n\npress <return> to continue")
 
     def status_bar(self):
-        string = f"Year = {self.__economy.get_year()}  Balance: {self.__farmer.get_money()}   "
+        string = f"Year: {self.__economy.get_year()}  Balance: ${self.__farmer.get_money():0.2f}   "
         workers = (self.__farmer.get_farmHands() + (self.__farmer.get_family()-1))
         string += f"Total Workers: {workers}   Plots Owned: {self.__farmer.get_owned_plots()}\n"
         print(string)

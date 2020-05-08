@@ -20,11 +20,11 @@ class Plants(object):
     def get_sellValue(self):
         return float(self.__sellValue)
 
-    def get___lowerLimit(self):
-        return self.____lowerLimit
+    def get__lowerLimit(self):
+        return self.__lowerLimit
 
-    def get_upperLimit(self):
-        return self.__upperLimit
+    def get__upperLimit(self):
+        return float(self.__upperLimit)
 
     def set_sellValue(self, newValue):
         self.__sellValue = newValue
@@ -32,3 +32,4 @@ class Plants(object):
     def __str__(self):
         string = f"{self.__type}...\n   Cost: {self.__price}\n   Success Rate: {self.__risk}"
         string += f"\n  Sell Price: each {self.__type} sells at {self.__sellValue} per bushel"
+        return string

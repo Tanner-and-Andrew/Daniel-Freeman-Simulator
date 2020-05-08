@@ -25,3 +25,4 @@ class Animals(object):
     def __str__(self):
         string = f"{self.__type}...\n   Cost: {self.__price}\n   Product: {self.__product}, sells at ${self.__productValue} per pound"
         string += f"\n  Sell Price: each {self.__type} sells at {self.__sellValue} per {self.__type}"
+        return string

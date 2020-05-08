@@ -23,12 +23,12 @@ class Economy(object):
     def randomize_plants(self):
         for plant in self.__plants:
             sellValue = plant.get_sellValue()
-            lowerLimit = plant.get___lowerLimit()
-            upperLimit = plant.get_upperLimit()
+            lowerLimit = plant.get__lowerLimit()
+            upperLimit = plant.get__upperLimit()
             sellValue = random.choice([sellValue-(0.15*sellValue), sellValue, sellValue+(0.15*sellValue)])
-            if sellValue < lowerLimit:
+            if sellValue < float(lowerLimit):
                 sellValue = lowerLimit
-            elif sellValue > upperLimit:
+            if sellValue > upperLimit:
                 sellValue = upperLimit
         plant.set_sellValue(sellValue)
 
@@ -37,11 +37,15 @@ class Economy(object):
         string = "################################################################################################\n"
         string += f"                               ANNUAL FARM REPORT: {self.__year}\n"
         string += "################################################################################################\n\n"
+        string += f"\n**** Plants ****\n\n"
         for plant in self.__plants:
-            string += f"{plant.get_type()}: ${plant.get_sellValue()} per bushel\n\n"
+            #string += f"\nPlants\n--------\n"
+            string += f"{plant.get_type()}: ${plant.get_sellValue():0.2f} per bushel\n\n"
+        string += f"**** Animals ****\n\n"
         for animal in self.__animals:
-            string += f"{animal.get_type()}-\n     {animal.get_product()}: ${animal.get_productValue()} per pound"
-            string += f"\n     Price per {animal.get_type()}: ${animal.get_sellValue()}"
+            #string += f"\nAnimals\n---------\n"
+            string += f"{animal.get_type()}-\n     {animal.get_product()}: ${animal.get_productValue():0.2f} per pound"
+            string += f"\n     Price per {animal.get_type()}: ${animal.get_sellValue():0.2f}\n"
         print(string)
 
 

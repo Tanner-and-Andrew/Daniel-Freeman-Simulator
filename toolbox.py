@@ -122,6 +122,7 @@ def get_integer_between(low, high, prompt="Enter an integer:"):
     prompt += " (" + str(low) + "-" + str(high) + ")"
     number = get_integer(prompt)
     while (number < low) or (number > high):
+        "You must choose an owned plot."
         number = get_integer(prompt)
     return number
 

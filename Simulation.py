@@ -22,12 +22,12 @@ class Simulation(object):
         #self.help()
         command = ''
         self.get_family()
-        self.show_plots()
+        #self.show_plots()
         while command != 'quit':
             if command == 'help':
                 self.help('farmhelp.txt')
             elif command == 'advance':
-                self.__economy.advance()
+                self.__economy.run()
             elif command == 'plant':
                 self.plant()
             elif command == 'breed':
@@ -106,13 +106,14 @@ class Simulation(object):
                 risk = risk.strip()
                 sellValue = sellValue.strip()
                 lowerLimit = lowerLimit.strip()
-                upperLimit = upperLimit.strip
+                upperLimit = upperLimit.strip()
                 """if type not in Product.productTypes:
                     raise ValueError(f'{name}: product type cannot be "{type}". Check {filename}.')"""
                 if not toolbox.is_number(price):
                     raise ValueError(f'{type}: plant price must be a number. Check {filename}.')
                 plant = Plants(type, price, int(risk), sellValue, lowerLimit, upperLimit)
                 self.__plants.append(plant)
+                #print(self.__plants)
 
     def read_animals(self, filename):
         """Read in all animals from the file and add them to
@@ -145,8 +146,11 @@ class Simulation(object):
         print('==================================================')
         numberOfCrops = len(self.__plants)
         plantType = toolbox.get_integer_between(1, numberOfCrops, "Which crop do you want to plant? ")
-        plant = self.__plants[plantType-1][0]
-        self.__farmer.plant(whichPlot, plant)
+        #print(self.__plants)
+        #print(plantType)
+        plant = self.__plants[plantType-1]
+        contents = plant.get_type()
+        self.__farmer.plant(whichPlot, contents)
 
     def import_animal(self):
         whichPlot = self.__farmer.get_plot()
@@ -159,8 +163,9 @@ class Simulation(object):
             animalNumber += 1
         print('==================================================')
         animalType = toolbox.get_integer_between(1, animalNumber, "Which crop do you want to plant? ")
-        animal = self.__animals[animalType-1][0]
-        self.__farmer.import_animal(whichPlot, animal)
+        animal = self.__animals[animalType-1]
+        contents = animal.get_type()
+        self.__farmer.import_animal(whichPlot, contents)
 
     def advance(self):
         """
@@ -264,12 +269,6 @@ class Simulation(object):
 |                |                |                |                |
 |                |                |                |                |
 |________________|________________|________________|________________|
-
-
-
-
-
-
 """
         print(string)
 

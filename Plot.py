@@ -19,15 +19,17 @@ class Plot(object):
         #self.__animals = []
         #self.read_animals('animals.csv')
 
-    def set_plant(self, plant):
-        self.__contents = plant
+    def set_plant(self, string):
+        self.__contents = string
         self.__type = 'crop'
         self.__isempty = False
+        self.__count = 100
 
-    def set_animal(self, animal):
-        self.__contents = animal
+    def set_animal(self, string):
+        self.__contents = string
         self.__type = 'animal'
         self.__isempty = False
+        self.__count = 10
 
     def set_owned(self, para):
         self.__owned = para

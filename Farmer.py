@@ -93,7 +93,11 @@ class Farmer(object):
             self.totalPlots[counter-1].set_owned(False)
 
     def get_plot(self):
-        whichPlot = toolbox.get_integer_between(1, len(self.totalPlots), "Which plot would you like to plant on? ")
+        counter = 0
+        for plots in self.totalPlots:
+            if plots.get_owned():
+                counter += 1
+        whichPlot = toolbox.get_integer_between(1, counter, "Which plot would you like to plant on? ")
         whichPlot = whichPlot - 1
         return whichPlot
 

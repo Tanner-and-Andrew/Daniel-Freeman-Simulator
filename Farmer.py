@@ -9,8 +9,8 @@ class Farmer(object):
         self.__family = family
         self.__money = 200
         self.totalPlots = [Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(),
-                             Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(),
-                             Plot(), Plot(), Plot(), Plot()]
+                           Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(), Plot(),
+                           Plot(), Plot(), Plot(), Plot()]
         self.set_owned()
 
     def __str__(self):

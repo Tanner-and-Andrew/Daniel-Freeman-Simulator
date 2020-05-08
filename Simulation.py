@@ -31,7 +31,7 @@ class Simulation(object):
             elif command == 'plant':
                 self.plant()
             elif command == 'breed':
-                self.__farmer.breed()
+                self.import_animal()
             elif command == 'shop':
                 self.__menu = 'shop'
                 self.get_menu()
@@ -162,7 +162,7 @@ class Simulation(object):
             print(string)
             animalNumber += 1
         print('==================================================')
-        animalType = toolbox.get_integer_between(1, animalNumber, "Which crop do you want to plant? ")
+        animalType = toolbox.get_integer_between(1, animalNumber-1, "Which animal do you want to purchase? ")
         animal = self.__animals[animalType-1]
         contents = animal.get_type()
         self.__farmer.import_animal(whichPlot, contents)

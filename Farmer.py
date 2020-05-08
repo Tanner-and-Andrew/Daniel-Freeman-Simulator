@@ -23,6 +23,13 @@ class Farmer(object):
         string += f'\n\nPlots = {len(self.totalPlots)}'
         print(string)
 
+    def get_owned_plots(self):
+        counter = 0
+        for plots in self.totalPlots:
+            if plots.get_owned():
+                counter += 1
+        return counter
+
     def set_owned(self):
         counter = 0
         while counter < 4:

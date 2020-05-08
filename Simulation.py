@@ -43,6 +43,7 @@ class Simulation(object):
                 pass
             #self.__farmer.show_plots()
             self.show_plots()
+            self.status_bar()
             self.get_menu()
             self.__menu = 'main'
             command = self.get_command()
@@ -94,6 +95,12 @@ class Simulation(object):
         if prompt:
             input('\n' + prompt)
         hi = input("\n\npress <return> to continue")
+
+    def status_bar(self):
+        string = f"Year = {self.__economy.get_year()}  Balance: {self.__farmer.get_money()}   "
+        workers = (self.__farmer.get_farmHands() + (self.__farmer.get_family()-1))
+        string += f"Total Workers: {workers}   Plots Owned: {self.__farmer.get_owned_plots()}\n"
+        print(string)
 
     def read_plants(self, filename):
         """Read in all plants from the file and add them to
@@ -234,41 +241,34 @@ class Simulation(object):
                 plot.set_contents("For Sale")
             contentList.append(plot.get_contents())
         string = f"""
- ________________ ________________ ________________ ________________ 
-|                |                |                |                |        
-|                |                |                |                |
-|{contentList[0]:^16}|{contentList[1]:^16}|{contentList[2]:^16}|{contentList[3]:^16}|
-|                |                |                |                |
-|                |                |                |                |
-|________________|________________|________________|________________|
- ________________ ________________ ________________ ________________ 
-|                |                |                |                |        
-|                |                |                |                |
-|{contentList[4]:^16}|{contentList[5]:^16}|{contentList[6]:^16}|{contentList[7]:^16}|
-|                |                |                |                |
-|                |                |                |                |
-|________________|________________|________________|________________|
- ________________ ________________ ________________ ________________ 
-|                |                |                |                |        
-|                |                |                |                |
-|{contentList[8]:^16}|{contentList[9]:^16}|{contentList[10]:^16}|{contentList[11]:^16}|
-|                |                |                |                |
-|                |                |                |                |
-|________________|________________|________________|________________|
- ________________ ________________ ________________ ________________ 
-|                |                |                |                |        
-|                |                |                |                |
-|{contentList[12]:^16}|{contentList[13]:^16}|{contentList[14]:^16}|{contentList[15]:^16}|
-|                |                |                |                |
-|                |                |                |                |
-|________________|________________|________________|________________|
- ________________ ________________ ________________ ________________ 
-|                |                |                |                |        
-|                |                |                |                |
-|{contentList[16]:^16}|{contentList[17]:^16}|{contentList[18]:^16}|{contentList[19]:^16}|
-|                |                |                |                |
-|                |                |                |                |
-|________________|________________|________________|________________|
+ ________________ ________________ ________________ ________________ ________________
+|                |                |                |                |                |        
+|                |                |                |                |                |
+|{contentList[0]:^16}|{contentList[1]:^16}|{contentList[2]:^16}|{contentList[3]:^16}|{contentList[4]:^16}|
+|                |                |                |                |                |
+|                |                |                |                |                |
+|________________|________________|________________|________________|________________|
+ ________________ ________________ ________________ ________________ ________________
+|                |                |                |                |                |        
+|                |                |                |                |                |
+|{contentList[5]:^16}|{contentList[6]:^16}|{contentList[7]:^16}|{contentList[8]:^16}|{contentList[9]:^16}|
+|                |                |                |                |                |
+|                |                |                |                |                |
+|________________|________________|________________|________________|________________|
+ ________________ ________________ ________________ ________________ ________________
+|                |                |                |                |                |        
+|                |                |                |                |                |
+|{contentList[10]:^16}|{contentList[11]:^16}|{contentList[12]:^16}|{contentList[13]:^16}|{contentList[14]:^16}|
+|                |                |                |                |                |
+|                |                |                |                |                |
+|________________|________________|________________|________________|________________|
+ ________________ ________________ ________________ ________________ ________________
+|                |                |                |                |                |        
+|                |                |                |                |                |
+|{contentList[15]:^16}|{contentList[16]:^16}|{contentList[17]:^16}|{contentList[18]:^16}|{contentList[19]:^16}|
+|                |                |                |                |                |
+|                |                |                |                |                |
+|________________|________________|________________|________________|________________|
 """
         print(string)
 

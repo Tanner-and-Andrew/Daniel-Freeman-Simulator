@@ -14,6 +14,9 @@ class Economy(object):
         self.__chickens = chickens
         self.__goats = goats"""
 
+    def get_year(self):
+        return self.__year
+
     def run(self):
         self.randomize_plants()
         #self.randomize_animals()

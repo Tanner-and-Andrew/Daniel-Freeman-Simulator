@@ -48,11 +48,11 @@ class Economy(object):
             lowerLimit = plant.get__lowerLimit()
             upperLimit = plant.get__upperLimit()
             sellValue = random.choice([sellValue-(0.15*sellValue), sellValue, sellValue+(0.15*sellValue)])
-            if sellValue < float(lowerLimit):
+            if float(sellValue) < float(lowerLimit):
                 sellValue = lowerLimit
-            if sellValue > upperLimit:
-                sellValue = upperLimit
-        plant.set_sellValue(sellValue)
+            if float(sellValue) > float(upperLimit):
+                sellValue = float(upperLimit)
+            plant.set_sellValue(sellValue)
 
     def print_farm_report(self):
         #self.__year += 1
@@ -123,7 +123,7 @@ class Economy(object):
         string += f"$7.00 x {farmhands} Farmhand(s)    =    ${farmhandCost:0.2f}\n\n"
         string += "################################################################################################\n\n"
         string += f"**** Totals ****\n\n"
-        totalRevenue = animalProfit + plantProfit
+        totalRevenue = totalAnimalProfit + totalPlantProfit
         totalExpenses = farmhandCost + familyCost
         string += f"                             Total Revenue     =     ${totalRevenue:0.2f}\n"
         string += f"                                  Expenses     =     ${totalExpenses:0.2f}\n\n"
@@ -133,6 +133,7 @@ class Economy(object):
         string += f"                          Updated Balance      =     ${balance:0.2f}\n"
         string += "################################################################################################\n\n"
         print(string)
+        return balance
 
     def reset_plots(self, totalPlots):
         for plot in totalPlots:

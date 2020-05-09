@@ -133,7 +133,7 @@ class Simulation(object):
                 money = self.__farmer.get_money() + (plotList[whichPlot].get_count() *
                                                      self.__animals[index].get_sellValue())
                 self.__farmer.set_money(money)
-                plotList[whichPlot].reset_plot()
+                plotList[whichPlot].reset_animal_plot()
 
     def read_plants(self, filename):
         """Read in all plants from the file and add them to

@@ -137,7 +137,7 @@ class Economy(object):
 
     def reset_plots(self, totalPlots):
         for plot in totalPlots:
-            plot.reset_plot()
+            plot.reset_plant_plot()
 
 
 

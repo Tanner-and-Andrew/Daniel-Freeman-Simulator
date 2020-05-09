@@ -21,10 +21,15 @@ class Plot(object):
         #self.__animals = []
         #self.read_animals('animals.csv')
 
-    def reset_plot(self):
+    def reset_plant_plot(self):
         if self.__type == "crop":
             self.__init__()
-        self.__owned = True
+            self.__owned = True
+
+    def reset_animal_plot(self):
+        if self.__type == "animal":
+            self.__init__()
+            self.__owned = True
 
     def set_plant(self, string, index):
         self.__contents = string
@@ -77,15 +82,7 @@ class Plot(object):
         self.__success = parameter
 
     def __str__(self):
-        print(f"""  
- ________________
-|                |
-|                | 
-|     {self.__contents}      |
-|                | 
-|                |
-|________________| 
-           """)
+        print(f'{self.__owned}')
 
     def print_plot(self):
         return f"""  

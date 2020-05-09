@@ -45,9 +45,7 @@ class Farmer(object):
         Raises the salary fee.
         :return:
         """
-        confirm = toolbox.get_boolean("Are you sure you want to hire a farm hand? : ")
-        if confirm:
-            self.__farmHands += 1
+        self.__farmHands += 1
 
     def fire_farmHands(self):
         """
@@ -55,13 +53,7 @@ class Farmer(object):
         Lowers the salary fee.
         :return:
         """
-        confirm = toolbox.get_boolean("Are you sure you want to fire a farm hand? : ")
-        if confirm:
-            amount = toolbox.get_integer_between(1, self.__farmHands, "How many farm hands would you like to fire?: ")
-            self.__farmHands = self.__farmHands - amount
-            if self.__farmHands < 0:
-                print("You don't have that many farm hands to fire.")
-                self.__farmHands = self.__farmHands + amount
+        self.__farmHands = self.__farmHands - 1
 
     def buy_plot(self):
         """
@@ -83,6 +75,7 @@ class Farmer(object):
                     if plots.get_owned():
                         counter += 1
                 self.totalPlots[counter].set_owned(True)
+                self.hire_farmHands()
 
     def sell_plot(self):
         """
@@ -101,6 +94,7 @@ class Farmer(object):
                 if plots.get_owned():
                     counter += 1
             self.totalPlots[counter-1].set_owned(False)
+            self.fire_farmHands()
 
     def get_plot(self):
         counter = 0

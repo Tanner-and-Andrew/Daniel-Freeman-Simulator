@@ -21,6 +21,9 @@ class Plot(object):
         #self.__animals = []
         #self.read_animals('animals.csv')
 
+    def reset_plot(self):
+        self.__init__()
+
     def set_plant(self, string, index):
         self.__contents = string
         self.__type = 'crop'

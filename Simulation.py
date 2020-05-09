@@ -9,7 +9,8 @@ import toolbox
 class Simulation(object):
 
     def __init__(self):
-        #self.__plotList = [True, True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
+        '''self.__plotList = [True, True, True, True, False, False, False, False, False, False, False,
+                           False, False, False, False, False, False, False, False, False, False, False]'''
         self.__menu = 'main'
         self.__farmer = None
         self.__plants = []
@@ -47,11 +48,15 @@ class Simulation(object):
                 self.__economy.print_farm_report()
                 answer = input("<Press RETURN to continue>")
             elif command == 'reset':
-                pass
+                self.reset()
             elif command == 'farmhands':
                 self.edit_farmhands()
             elif command == 'land':
-                pass
+                self.__farmer.buy_plot()
+            elif command == 'sell land':
+                self.__farmer.sell_plot()
+            elif command == 'sell animal':
+                self.sell_animals()
             #self.__farmer.show_plots()
             self.show_plots()
             self.status_bar()
@@ -67,7 +72,7 @@ class Simulation(object):
         if self.__menu == 'main':
             print("[A]dvance  [P]lant  [B]reed  [S]hop  Last [Y]ear's Report  [R]eset  [Q]uit")
         if self.__menu == 'shop':
-            print("Purchase: [F]armhands [L]and")
+            print("Purchase: [F]armhands  [L]and   Sell: La[N]d  Ani[M]als")
 
     def get_command(self):
         """
@@ -83,14 +88,16 @@ class Simulation(object):
                     's': 'shop',
                     'f': 'farmhands',
                     'y': 'report',
-                    'l': 'land'}
+                    'l': 'land',
+                    'n': 'sell land',
+                    'm': 'sell animal'}
 
         validCommands = commands.keys()
 
         letter = '&&&&&&'
         while letter not in validCommands:
             userInput = input('Command: ')
-            letter = userInput[0].lower()
+            letter = userInput.lower()
 
         return commands[letter]
 
@@ -113,6 +120,17 @@ class Simulation(object):
         workers = (self.__farmer.get_farmHands() + (self.__farmer.get_family()-1))
         string += f"Total Workers: {workers}   Plots Owned: {self.__farmer.get_owned_plots()}\n"
         print(string)
+
+    def sell_animals(self):
+        whichPlot = self.__farmer.get_plot()
+        plotList = self.__farmer.get_totalPlots()
+        while plotList[whichPlot].get_type() != 'animal':
+            whichPlot = self.__farmer.get_plot()
+        else:
+            index = plotList[whichPlot].get_index()
+            money = self.__farmer.get_money() + (plotList[whichPlot].get_count() *
+                                                 self.__animals[index].get_sellValue())
+            self.__farmer.set_money(money)
 
     def read_plants(self, filename):
         """Read in all plants from the file and add them to
@@ -152,6 +170,10 @@ class Simulation(object):
                 animal = Animals(type, float(price), product, float(productValue), float(sellValue))
                 self.__animals.append(animal)
 
+    def reset(self):
+        confirm = toolbox.get_boolean("Are you sure you want to reset? All progress will be lost. ")
+        if confirm:
+            self.main()
 
     def plant(self):
         whichPlot = self.__farmer.get_plot()
@@ -170,6 +192,8 @@ class Simulation(object):
         plant = self.__plants[plantType-1]
         contents = plant.get_type()
         self.__farmer.plant(whichPlot, contents, plantType-1)
+        money = self.__farmer.get_money() - plant.get_price()
+        self.__farmer.set_money(money)
 
     def import_animal(self):
         whichPlot = self.__farmer.get_plot()
@@ -185,6 +209,8 @@ class Simulation(object):
         animal = self.__animals[animalType-1]
         contents = animal.get_type()
         self.__farmer.import_animal(whichPlot, contents, animalType-1)
+        money = self.__farmer.get_money() - animal.get_price()
+        self.__farmer.set_money(money)
 
     def advance(self):
         """

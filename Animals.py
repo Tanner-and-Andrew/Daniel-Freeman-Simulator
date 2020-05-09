@@ -20,7 +20,7 @@ class Animals(object):
         return float(self.__productValue)
 
     def get_sellValue(self):
-        return self.__sellValue
+        return float(self.__sellValue)
 
     def __str__(self):
         string = f"{self.__type}...\n   Cost: {self.__price}\n   Product: {self.__product}, sells at ${self.__productValue} per pound"

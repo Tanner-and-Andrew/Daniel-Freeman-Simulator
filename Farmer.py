@@ -23,6 +23,9 @@ class Farmer(object):
         string += f'\n\nPlots = {len(self.totalPlots)}'
         print(string)
 
+    def set_money(self, money):
+        self.__money = money
+
     def get_owned_plots(self):
         counter = 0
         for plots in self.totalPlots:
@@ -104,7 +107,7 @@ class Farmer(object):
         for plots in self.totalPlots:
             if plots.get_owned():
                 counter += 1
-        whichPlot = toolbox.get_integer_between(1, counter, "Which plot would you like to put this on? ")
+        whichPlot = toolbox.get_integer_between(1, counter, "Which plot? ")
         whichPlot = whichPlot - 1
         return whichPlot
 
@@ -121,7 +124,7 @@ class Farmer(object):
         return self.__family
 
     def get_money(self):
-        return self.__money
+        return float(self.__money)
 
     def get_totalPlots_length(self):
         return len(self.totalPlots)

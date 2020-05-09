@@ -76,6 +76,7 @@ class Farmer(object):
                         counter += 1
                 self.totalPlots[counter].set_owned(True)
                 self.hire_farmHands()
+                print('You also hired a farmhand to work on the new land.')
 
     def sell_plot(self):
         """
@@ -85,15 +86,15 @@ class Farmer(object):
         :return: None
         """
         plotPrice = 25
-        whichPlot = toolbox.get_integer_between(1, len(self.totalPlots), "Which plot would you like to sell? ")
-        whichPlot = whichPlot - 1
-        confirm = toolbox.get_boolean("Are you sure you want to sell this plot?")
+        confirm = toolbox.get_boolean("Are you sure you want to sell a plot?")
         if confirm:
             counter = 0
             for plots in self.totalPlots:
                 if plots.get_owned():
                     counter += 1
             self.totalPlots[counter-1].set_owned(False)
+            self.__money = self.__money + plotPrice
+            print('You also fired a farmhand as they had no job.')
             self.fire_farmHands()
 
     def get_plot(self):

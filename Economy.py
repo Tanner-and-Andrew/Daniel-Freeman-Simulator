@@ -82,7 +82,7 @@ class Economy(object):
                         if number >= plant.get_risk():
                             plot.set_success(False)
 
-    def print_results(self, totalPlots):
+    def print_results(self, totalPlots, farmhands, family, balance):
         string = "################################################################################################\n"
         string += f"                               YOUR FARM RESULTS: {self.__year}\n"
         string += "################################################################################################\n\n"
@@ -96,7 +96,7 @@ class Economy(object):
                         string += f"{plant.get_type()}:\n"
                         if plot.get_success():
                                 string += f"     ${plant.get_sellValue():0.2f} per bushel \n\n"
-                                plantProfit = (plant.get_sellValue()*40)
+                                plantProfit = (plant.get_sellValue()*100)
                                 string += f"     ${plant.get_sellValue():0.2f} x {plot.get_count()} bushels         =      ${plantProfit:0.2f}\n\n"
                                 totalPlantProfit += plantProfit
                         else:
@@ -112,10 +112,32 @@ class Economy(object):
                         pounds = plot.get_count()*2
                         string += f"     Pounds Produced: {pounds}\n"
                         animalProfit = (pounds) * (animal.get_productValue())
-                        string += f"     Revenue : {pounds}lbs x ${animal.get_productValue():0.2f}     =      ${animalProfit:0.2f}"
+                        string += f"     Revenue : {pounds} lbs x ${animal.get_productValue():0.2f}     =      ${animalProfit:0.2f}\n"
                         totalAnimalProfit += animalProfit
-
+        string += "################################################################################################\n\n"
+        string += f"**** Expenses ****\n\n"
+        string += f"Providing for family = $5 per Family Member\nPaying Farmhands = $7 per Farmhand\n"
+        familyCost = (family*5)
+        string += f"$5.00 x {family} Family Members    =    ${familyCost:0.2f}\n"
+        farmhandCost = (farmhands * 7)
+        string += f"$7.00 x {farmhands} Farmhand(s)    =    ${farmhandCost:0.2f}\n\n"
+        string += "################################################################################################\n\n"
+        string += f"**** Totals ****\n\n"
+        totalRevenue = animalProfit + plantProfit
+        totalExpenses = farmhandCost + familyCost
+        string += f"                             Total Revenue     =     ${totalRevenue:0.2f}\n"
+        string += f"                                  Expenses     =     ${totalExpenses:0.2f}\n\n"
+        moneyEarned = totalRevenue-totalExpenses
+        string += f"Total Revenue - Expenses = Yearly Earnings     =     ${moneyEarned:0.2f}\n\n"
+        balance = balance + moneyEarned
+        string += f"                          Updated Balance      =     ${balance:0.2f}\n"
+        string += "################################################################################################\n\n"
         print(string)
+
+    def reset_plots(self, totalPlots):
+        for plot in totalPlots:
+            plot.reset_plot()
+
 
 
 

@@ -13,7 +13,7 @@ class Plot(object):
         #specific crop
         self.__count = 0
         self.__owned = False
-        self.__isempty = True
+        self.__isEmpty = True
         self.__index = 0
         self.__success = True
         #self.__plants = []
@@ -22,24 +22,32 @@ class Plot(object):
         #self.read_animals('animals.csv')
 
     def reset_plot(self):
-        self.__init__()
+        if self.__type == "crop":
+            self.__init__()
+        self.__owned = True
 
     def set_plant(self, string, index):
         self.__contents = string
         self.__type = 'crop'
-        self.__isempty = False
+        self.__isEmpty = False
         self.__count = 100
         self.__index = index
 
     def set_animal(self, string, index):
         self.__contents = string
         self.__type = 'animal'
-        self.__isempty = False
+        self.__isEmpty = False
         self.__count = 10
         self.__index =  index
 
     def set_owned(self, para):
         self.__owned = para
+
+    def set_type(self, type):
+        self.__type = type
+
+    def set_empty(self, isEmpty):
+        self.__isEmpty = isEmpty
 
     def get_type(self):
         return self.__type
@@ -54,7 +62,7 @@ class Plot(object):
         self.__contents = contents
 
     def check_isempty(self):
-        return self.__isempty
+        return self.__isEmpty
 
     def get_index(self):
         return self.__index

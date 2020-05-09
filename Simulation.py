@@ -31,9 +31,9 @@ class Simulation(object):
                 self.__economy.run()
                 answer = input("<Press RETURN to continue>")
                 self.__economy.determine_success(self.__farmer.totalPlots)
-                self.__economy.print_results(self.__farmer.totalPlots)
+                self.__economy.print_results(self.__farmer.totalPlots, self.__farmer.get_farmHands(), self.__farmer.get_family(), self.__farmer.get_money())
                 answer = input("\n<Press RETURN to continue>")
-
+                self.__economy.reset_plots(self.__farmer.totalPlots)
             elif command == 'plant':
                 self.plant()
             elif command == 'breed':

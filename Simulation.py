@@ -28,6 +28,11 @@ class Simulation(object):
                 self.help('farmhelp.txt')
             elif command == 'advance':
                 self.__economy.run()
+                answer = input("<Press RETURN to continue>")
+                self.__economy.determine_success(self.__farmer.totalPlots)
+                self.__economy.print_results(self.__farmer.totalPlots)
+                answer = input("\n<Press RETURN to continue>")
+
             elif command == 'plant':
                 self.plant()
             elif command == 'breed':
@@ -172,7 +177,7 @@ class Simulation(object):
         animalNumber = 1
         for animal in self.__animals:
             string = f'==   {animalNumber}=  {animal.get_type()}  Price: {animal.get_price():0.2f}  '
-            string += f' Product: {animal.get_product()}  Earnings: {animal.get_productValue}'
+            string += f' Product: {animal.get_product()}  Earnings: {animal.get_productValue()}'
             print(string)
             animalNumber += 1
         print('==================================================')

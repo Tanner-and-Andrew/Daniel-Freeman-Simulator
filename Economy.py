@@ -39,8 +39,8 @@ class Economy(object):
         self.randomize_plants()
         #self.randomize_animals()
         self.print_farm_report()
-        self.determine_success()
-        self.print_results()
+        #success = self.determine_success()
+        #self.print_results(success)
 
     def randomize_plants(self):
         for plant in self.__plants:
@@ -71,16 +71,54 @@ class Economy(object):
         self.__previous_farm_report = string
         print(string)
 
-    def determine_success(self):
+    def determine_success(self, totalPlots):
         #ownedPlots = Farmer.get_totalPlots_length()
-        for plot in Farmer.get_totalPlots():
+        for plot in totalPlots:
             if plot.get_owned():
                 if plot.check_isempty() == False:
                     if plot.get_type() == 'crop':
                         plant = self.__plants[plot.get_index()]
                         number = random.randint(1, 100)
-                        if number <= plant.get_risk():
-                            success = True
+                        if number >= plant.get_risk():
+                            plot.set_success(False)
+
+    def print_results(self, totalPlots):
+        string = "################################################################################################\n"
+        string += f"                               YOUR FARM RESULTS: {self.__year}\n"
+        string += "################################################################################################\n\n"
+        string += f"\n**** Plants ****\n\n"
+        totalPlantProfit = 0
+        for plot in totalPlots:
+            if plot.get_owned():
+                if plot.check_isempty() == False:
+                    if plot.get_type() == 'crop':
+                        plant = self.__plants[plot.get_index()]
+                        string += f"{plant.get_type()}:\n"
+                        if plot.get_success():
+                                string += f"     ${plant.get_sellValue():0.2f} per bushel \n\n"
+                                plantProfit = (plant.get_sellValue()*40)
+                                string += f"     ${plant.get_sellValue():0.2f} x {plot.get_count()} bushels         =      ${plantProfit:0.2f}\n\n"
+                                totalPlantProfit += plantProfit
+                        else:
+                            string += "FAILED\n   *$0 earned\n\n"
+        string += f"**** Animals ****\n\n"
+        totalAnimalProfit = 0
+        for plot in totalPlots:
+            if plot.get_owned():
+                if plot.check_isempty() == False:
+                    if plot.get_type() == 'animal':
+                        animal = self.__animals[plot.get_index()]
+                        string += f"{animal.get_type()}-\n     {animal.get_product()}: ${animal.get_productValue():0.2f} per pound\n"
+                        pounds = plot.get_count()*2
+                        string += f"     Pounds Produced: {pounds}\n"
+                        animalProfit = (pounds) * (animal.get_productValue())
+                        string += f"     Revenue : {pounds}lbs x ${animal.get_productValue():0.2f}     =      ${animalProfit:0.2f}"
+                        totalAnimalProfit += animalProfit
+
+        print(string)
+
+
+
 
 
 

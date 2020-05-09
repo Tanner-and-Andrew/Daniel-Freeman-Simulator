@@ -15,6 +15,7 @@ class Plot(object):
         self.__owned = False
         self.__isempty = True
         self.__index = 0
+        self.__success = True
         #self.__plants = []
         #self.read_plants('plants.csv')
         #self.__animals = []
@@ -54,6 +55,15 @@ class Plot(object):
 
     def get_index(self):
         return self.__index
+
+    def get_count(self):
+        return self.__count
+
+    def get_success(self):
+        return self.__success
+
+    def set_success(self, parameter):
+        self.__success = parameter
 
     def __str__(self):
         print(f"""  

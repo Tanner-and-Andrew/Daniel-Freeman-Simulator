@@ -1,4 +1,5 @@
 import random
+from Farmer import Farmer
 class Economy(object):
 
     def __init__(self, animals, plants):
@@ -38,6 +39,7 @@ class Economy(object):
         self.randomize_plants()
         #self.randomize_animals()
         self.print_farm_report()
+        self.determine_success()
         self.print_results()
 
     def randomize_plants(self):
@@ -68,6 +70,23 @@ class Economy(object):
             string += f"\n     Price per {animal.get_type()}: ${animal.get_sellValue():0.2f}\n"
         self.__previous_farm_report = string
         print(string)
+
+    def determine_success(self):
+        #ownedPlots = Farmer.get_totalPlots_length()
+        for plot in Farmer.get_totalPlots():
+            if plot.get_owned():
+                if plot.check_isempty() == False:
+                    if plot.get_type() == 'crop':
+                        plant = self.__plants[plot.get_index()]
+                        number = random.randint(1, 100)
+                        if number <= plant.get_risk():
+                            success = True
+
+
+
+
+
+
 
     def get_previous_report(self):
         return self.__previous_farm_report

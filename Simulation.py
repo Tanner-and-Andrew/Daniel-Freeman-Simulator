@@ -9,7 +9,7 @@ import toolbox
 class Simulation(object):
 
     def __init__(self):
-        self.__plotList = [True, True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
+        #self.__plotList = [True, True, True, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
         self.__menu = 'main'
         self.__farmer = None
         self.__plants = []
@@ -164,7 +164,7 @@ class Simulation(object):
         #print(plantType)
         plant = self.__plants[plantType-1]
         contents = plant.get_type()
-        self.__farmer.plant(whichPlot, contents)
+        self.__farmer.plant(whichPlot, contents, plantType-1)
 
     def import_animal(self):
         whichPlot = self.__farmer.get_plot()
@@ -179,7 +179,7 @@ class Simulation(object):
         animalType = toolbox.get_integer_between(1, animalNumber-1, "Which animal do you want to purchase? ")
         animal = self.__animals[animalType-1]
         contents = animal.get_type()
-        self.__farmer.import_animal(whichPlot, contents)
+        self.__farmer.import_animal(whichPlot, contents, animalType-1)
 
     def advance(self):
         """

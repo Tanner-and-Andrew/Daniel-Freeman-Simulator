@@ -63,7 +63,7 @@ class Farmer(object):
         :return: None
         """
         plotPrice = 50
-        confirm = toolbox.get_boolean('Are you sure you want to purchase another plot? : ')
+        confirm = toolbox.get_boolean('Are you sure you want to purchase another plot for $50? : ')
         if confirm:
             self.__money = self.__money - plotPrice
             if self.__money < 0:
@@ -75,8 +75,9 @@ class Farmer(object):
                     if plots.get_owned():
                         counter += 1
                 self.totalPlots[counter].set_owned(True)
+                self.totalPlots[counter].set_contents("EMPTY")
                 self.hire_farmHands()
-                print('You also hired a farmhand to work on the new land.')
+                print('\nYou also hired a farmhand to work on the new land.\n')
 
     def sell_plot(self):
         """

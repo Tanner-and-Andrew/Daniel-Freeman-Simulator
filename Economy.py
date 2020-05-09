@@ -131,7 +131,7 @@ class Economy(object):
         string += f"Total Revenue - Expenses = Yearly Earnings     =     ${moneyEarned:0.2f}\n\n"
         balance = balance + moneyEarned
         string += f"                          Updated Balance      =     ${balance:0.2f}\n"
-        string += "################################################################################################\n\n"
+        string += "################################################################################################"
         print(string)
         return balance
 

@@ -23,25 +23,26 @@ class Simulation(object):
         #self.help()
         command = ''
         self.get_family()
-        #self.show_plots()
+        self.show_plots()
         while command != 'quit':
             if command == 'help':
                 self.help('farmhelp.txt')
             elif command == 'advance':
-                self.__economy.run()
+                self.advance()
+                """self.__economy.run()
                 answer = input("<Press RETURN to continue>")
                 self.__economy.determine_success(self.__farmer.totalPlots)
                 balance = self.__economy.print_results(self.__farmer.totalPlots, self.__farmer.get_farmHands(), self.__farmer.get_family(), self.__farmer.get_money())
                 self.__farmer.set_money(balance)
                 answer = input("\n<Press RETURN to continue>")
-                self.__economy.reset_plots(self.__farmer.totalPlots)
+                self.__economy.reset_plots(self.__farmer.totalPlots)"""
             elif command == 'plant':
                 self.plant()
             elif command == 'breed':
                 self.import_animal()
             elif command == 'shop':
                 self.__menu = 'shop'
-                self.get_menu()
+                #2self.get_menu()
             elif command == 'report':
                 #if self.__economy.get_year() == 1849:
                     #self.__economy.original_report()
@@ -56,8 +57,9 @@ class Simulation(object):
                 self.__farmer.sell_plot()
             elif command == 'sell animal':
                 self.sell_animals()
+            elif command == 'back':
+                self.__menu = 'main'
             #self.__farmer.show_plots()
-            self.show_plots()
             self.status_bar()
             self.get_menu()
             self.__menu = 'main'
@@ -71,7 +73,7 @@ class Simulation(object):
         if self.__menu == 'main':
             print("[A]dvance  [P]lant  [B]reed  [S]hop  Last [Y]ear's Report  [R]eset  [Q]uit")
         if self.__menu == 'shop':
-            print("Purchase: [L]and   Sell: La[N]d  Ani[M]als")
+            print("Purchase: [L]and   Sell: La[N]d  Ani[M]als  Bac[K]")
 
     def get_command(self):
         """
@@ -88,6 +90,7 @@ class Simulation(object):
                     'y': 'report',
                     'l': 'land',
                     'n': 'sell land',
+                    'k': 'back',
                     'm': 'sell animal'}
 
         validCommands = commands.keys()
@@ -134,6 +137,7 @@ class Simulation(object):
                                                      self.__animals[index].get_sellValue())
                 self.__farmer.set_money(money)
                 plotList[whichPlot].reset_animal_plot()
+        self.show_plots()
 
     def read_plants(self, filename):
         """Read in all plants from the file and add them to
@@ -203,6 +207,7 @@ class Simulation(object):
             self.__farmer.plant(whichPlot, contents, plantType-1)
             money = self.__farmer.get_money() - plant.get_price()
             self.__farmer.set_money(money)
+            self.show_plots()
 
     def import_animal(self):
         whichPlot = self.__farmer.get_plot()
@@ -225,6 +230,7 @@ class Simulation(object):
             self.__farmer.import_animal(whichPlot, contents, animalType-1)
             money = self.__farmer.get_money() - animal.get_price()
             self.__farmer.set_money(money)
+            self.show_plots()
 
     def advance(self):
         """
@@ -232,6 +238,12 @@ class Simulation(object):
         :return: None
         """
         self.__economy.run()
+        answer = input("<Press RETURN to continue>")
+        self.__economy.determine_success(self.__farmer.totalPlots)
+        balance = self.__economy.print_results(self.__farmer.totalPlots, self.__farmer.get_farmHands(), self.__farmer.get_family(), self.__farmer.get_money())
+        self.__farmer.set_money(balance)
+        answer = input("\n<Press RETURN to continue>")
+        self.__economy.reset_plots(self.__farmer.totalPlots)
 
     def print_farmHand_options(self):
         """
@@ -288,29 +300,29 @@ class Simulation(object):
  ________________ ________________ ________________ ________________ ________________
 |                |                |                |                |                |        
 |                |                |                |                |                |
+|       1        |       2        |        3       |        4       |        5       |
 |{contentList[0]:^16}|{contentList[1]:^16}|{contentList[2]:^16}|{contentList[3]:^16}|{contentList[4]:^16}|
 |                |                |                |                |                |
-|                |                |                |                |                |
 |________________|________________|________________|________________|________________|
  ________________ ________________ ________________ ________________ ________________
 |                |                |                |                |                |        
 |                |                |                |                |                |
+|       6        |       7        |       8        |       9        |       10       |
 |{contentList[5]:^16}|{contentList[6]:^16}|{contentList[7]:^16}|{contentList[8]:^16}|{contentList[9]:^16}|
 |                |                |                |                |                |
-|                |                |                |                |                |
 |________________|________________|________________|________________|________________|
  ________________ ________________ ________________ ________________ ________________
 |                |                |                |                |                |        
 |                |                |                |                |                |
+|       11       |        12      |       13       |       14       |       15       |
 |{contentList[10]:^16}|{contentList[11]:^16}|{contentList[12]:^16}|{contentList[13]:^16}|{contentList[14]:^16}|
 |                |                |                |                |                |
-|                |                |                |                |                |
 |________________|________________|________________|________________|________________|
  ________________ ________________ ________________ ________________ ________________
 |                |                |                |                |                |        
 |                |                |                |                |                |
+|       16       |        17      |       18       |       19       |       20       |
 |{contentList[15]:^16}|{contentList[16]:^16}|{contentList[17]:^16}|{contentList[18]:^16}|{contentList[19]:^16}|
-|                |                |                |                |                |
 |                |                |                |                |                |
 |________________|________________|________________|________________|________________|
 """

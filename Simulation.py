@@ -49,8 +49,6 @@ class Simulation(object):
                 answer = input("<Press RETURN to continue>")
             elif command == 'reset':
                 self.reset()
-            elif command == 'farmhands':
-                self.edit_farmhands()
             elif command == 'land':
                 self.__farmer.buy_plot()
             elif command == 'sell land':
@@ -72,7 +70,7 @@ class Simulation(object):
         if self.__menu == 'main':
             print("[A]dvance  [P]lant  [B]reed  [S]hop  Last [Y]ear's Report  [R]eset  [Q]uit")
         if self.__menu == 'shop':
-            print("Purchase: [F]armhands  [L]and   Sell: La[N]d  Ani[M]als")
+            print("Purchase: [L]and   Sell: La[N]d  Ani[M]als")
 
     def get_command(self):
         """
@@ -86,7 +84,6 @@ class Simulation(object):
                     'r': 'reset',
                     'q': 'quit',
                     's': 'shop',
-                    'f': 'farmhands',
                     'y': 'report',
                     'l': 'land',
                     'n': 'sell land',
@@ -124,13 +121,18 @@ class Simulation(object):
     def sell_animals(self):
         whichPlot = self.__farmer.get_plot()
         plotList = self.__farmer.get_totalPlots()
-        while plotList[whichPlot].get_type() != 'animal':
-            whichPlot = self.__farmer.get_plot()
-        else:
-            index = plotList[whichPlot].get_index()
-            money = self.__farmer.get_money() + (plotList[whichPlot].get_count() *
-                                                 self.__animals[index].get_sellValue())
-            self.__farmer.set_money(money)
+        for plot in plotList:
+            if plot.get_type() == 'animal':
+                exists = True
+        if exists:
+            while plotList[whichPlot].get_type() != 'animal':
+                whichPlot = self.__farmer.get_plot()
+            else:
+                index = plotList[whichPlot].get_index()
+                money = self.__farmer.get_money() + (plotList[whichPlot].get_count() *
+                                                     self.__animals[index].get_sellValue())
+                self.__farmer.set_money(money)
+                plotList[whichPlot].reset_plot()
 
     def read_plants(self, filename):
         """Read in all plants from the file and add them to
@@ -173,44 +175,55 @@ class Simulation(object):
     def reset(self):
         confirm = toolbox.get_boolean("Are you sure you want to reset? All progress will be lost. ")
         if confirm:
+            self.__init__()
             self.main()
 
     def plant(self):
         whichPlot = self.__farmer.get_plot()
-        print('==================================================')
-        plantNumber = 1
-        for plants in self.__plants:
-            string = f'==   {plantNumber}=  {plants.get_type()}  Price: ${plants.get_price():0.2f}  '
-            string += f'Chance of Success: {plants.get_risk()}%'
-            print(string)
-            plantNumber += 1
-        print('==================================================')
-        numberOfCrops = len(self.__plants)
-        plantType = toolbox.get_integer_between(1, numberOfCrops, "Which crop do you want to plant? ")
-        #print(self.__plants)
-        #print(plantType)
-        plant = self.__plants[plantType-1]
-        contents = plant.get_type()
-        self.__farmer.plant(whichPlot, contents, plantType-1)
-        money = self.__farmer.get_money() - plant.get_price()
-        self.__farmer.set_money(money)
+        plotList = self.__farmer.totalPlots
+        while not plotList[whichPlot].check_isempty():
+            print('You must choose an empty plot.')
+            whichPlot = self.__farmer.get_plot()
+        else:
+            print('==================================================')
+            plantNumber = 1
+            for plants in self.__plants:
+                string = f'==   {plantNumber} =  {plants.get_type()}  Price: ${plants.get_price():0.2f}  '
+                string += f'Chance of Success: {plants.get_risk()}%'
+                print(string)
+                plantNumber += 1
+            print('==================================================')
+            numberOfCrops = len(self.__plants)
+            plantType = toolbox.get_integer_between(1, numberOfCrops, "Which crop do you want to plant? ")
+            #print(self.__plants)
+            #print(plantType)
+            plant = self.__plants[plantType-1]
+            contents = plant.get_type()
+            self.__farmer.plant(whichPlot, contents, plantType-1)
+            money = self.__farmer.get_money() - plant.get_price()
+            self.__farmer.set_money(money)
 
     def import_animal(self):
         whichPlot = self.__farmer.get_plot()
-        print('==================================================')
-        animalNumber = 1
-        for animal in self.__animals:
-            string = f'==   {animalNumber}=  {animal.get_type()}  Price: {animal.get_price():0.2f}  '
-            string += f' Product: {animal.get_product()}  Earnings: {animal.get_productValue()}'
-            print(string)
-            animalNumber += 1
-        print('==================================================')
-        animalType = toolbox.get_integer_between(1, animalNumber-1, "Which animal do you want to purchase? ")
-        animal = self.__animals[animalType-1]
-        contents = animal.get_type()
-        self.__farmer.import_animal(whichPlot, contents, animalType-1)
-        money = self.__farmer.get_money() - animal.get_price()
-        self.__farmer.set_money(money)
+        plotList = self.__farmer.totalPlots
+        while not plotList[whichPlot].check_isempty():
+            print('You must choose an empty plot.')
+            whichPlot = self.__farmer.get_plot()
+        else:
+            print('==================================================')
+            animalNumber = 1
+            for animal in self.__animals:
+                string = f'==   {animalNumber} =  {animal.get_type()}  Price: {animal.get_price():0.2f}  '
+                string += f' Product: {animal.get_product()}  Earnings: {animal.get_productValue()}'
+                print(string)
+                animalNumber += 1
+            print('==================================================')
+            animalType = toolbox.get_integer_between(1, animalNumber-1, "Which animal do you want to purchase? ")
+            animal = self.__animals[animalType-1]
+            contents = animal.get_type()
+            self.__farmer.import_animal(whichPlot, contents, animalType-1)
+            money = self.__farmer.get_money() - animal.get_price()
+            self.__farmer.set_money(money)
 
     def advance(self):
         """
@@ -218,14 +231,6 @@ class Simulation(object):
         :return: None
         """
         self.__economy.run()
-
-    def edit_farmhands(self):
-        self.print_farmHand_options()
-        answer = toolbox.get_integer_between(1, 2, "Which option? ")
-        if answer == 2:
-            self.__farmer.hire_farmHands()
-        if answer == 1:
-            self.__farmer.fire_farmHands()
 
     def print_farmHand_options(self):
         """

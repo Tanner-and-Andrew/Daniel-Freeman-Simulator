@@ -116,11 +116,11 @@ class Economy(object):
                         totalAnimalProfit += animalProfit
         string += "################################################################################################\n\n"
         string += f"**** Expenses ****\n"
-        string += f"Providing for family = $5 per Family Member\nPaying Farmhands = $7 per Farmhand\n"
+        string += f"Providing for family = $10 per Family Member\nPaying Farmhands = $15 per Farmhand\n"
         familyCost = (family*5)
-        string += f"$5.00 x {family} Family Members    =    ${familyCost:0.2f}\n"
+        string += f"$10.00 x {family} Family Members    =    ${familyCost:0.2f}\n"
         farmhandCost = (farmhands * 7)
-        string += f"$7.00 x {farmhands} Farmhand(s)    =    ${farmhandCost:0.2f}\n\n"
+        string += f"$15.00 x {farmhands} Farmhand(s)    =    ${farmhandCost:0.2f}\n\n"
         string += "################################################################################################\n"
         string += f"**** Totals ****\n\n"
         totalRevenue = totalAnimalProfit + totalPlantProfit

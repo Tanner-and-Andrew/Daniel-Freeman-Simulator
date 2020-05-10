@@ -61,7 +61,7 @@ class Simulation(object):
             elif command == 'back':
                 self.__menu = 'main'
             #self.__farmer.show_plots()
-            self.status_bar()
+            #self.status_bar()
             self.get_menu()
             self.__menu = 'main'
             command = self.get_command()
@@ -116,9 +116,11 @@ class Simulation(object):
         if prompt:
             input('\n' + prompt)
         hi = input("\n\npress <return> to continue")
+        self.show_plots()
+        self.status_bar()
 
     def status_bar(self):
-        string = f"Year: {self.__economy.get_year()}  Balance: ${self.__farmer.get_money():0.2f}   "
+        string = f"Year: {self.__economy.get_year()+1}  Balance: ${self.__farmer.get_money():0.2f}   "
         workers = (self.__farmer.get_farmHands() + (self.__farmer.get_family()-1))
         string += f"Total Workers: {workers}   Plots Owned: {self.__farmer.get_owned_plots()}\n"
         print(string)
@@ -139,6 +141,7 @@ class Simulation(object):
                 self.__farmer.set_money(money)
                 plotList[whichPlot].reset_animal_plot()
         self.show_plots()
+        self.status_bar()
 
     def read_plants(self, filename):
         """Read in all plants from the file and add them to
@@ -209,6 +212,7 @@ class Simulation(object):
             money = self.__farmer.get_money() - plant.get_price()
             self.__farmer.set_money(money)
             self.show_plots()
+            self.status_bar()
 
     def import_animal(self):
         whichPlot = self.__farmer.get_plot()
@@ -221,7 +225,7 @@ class Simulation(object):
             animalNumber = 1
             for animal in self.__animals:
                 string = f'==   {animalNumber} =  {animal.get_type()}  Price: {animal.get_price():0.2f}  '
-                string += f' Product: {animal.get_product()}  Earnings: {animal.get_productValue()}'
+                string += f' Product: {animal.get_product()}  Earnings: ${animal.get_productValue():0.2f}'
                 print(string)
                 animalNumber += 1
             print('==================================================')
@@ -232,6 +236,7 @@ class Simulation(object):
             money = self.__farmer.get_money() - animal.get_price()
             self.__farmer.set_money(money)
             self.show_plots()
+            self.status_bar()
 
     def advance(self):
         """
@@ -245,6 +250,8 @@ class Simulation(object):
         self.__farmer.set_money(balance)
         answer = input("<Press RETURN to continue>")
         self.__economy.reset_plots(self.__farmer.totalPlots)
+        self.show_plots()
+        self.status_bar()
 
     def print_farmHand_options(self):
         """
@@ -288,7 +295,8 @@ class Simulation(object):
         string += '\nto account for the four plots that need to be worked on initially.'
         string += '\neg: option one will give you no children, but will assign you three farm hands.'
         string += '\nEach carry expenses, as you have too provide your family with food, which costs'
-        string += "\nmoney, or pay farmhands a salary. It's up to you to decide what you want.)"
+        string += "\nmoney, or pay farmhands a salary. It's up to you to decide w2" \
+                  "22222hat you want.)"
         string += '\n-----------------------\n'
         print(string)
 

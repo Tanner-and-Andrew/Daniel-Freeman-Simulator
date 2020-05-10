@@ -63,10 +63,10 @@ class Farmer(object):
         :return: None
         """
         plotPrice = 50
-        confirm = toolbox.get_boolean('Are you sure you want to purchase another plot for $50? : ')
+        confirm = toolbox.get_boolean(f'Are you sure you want to purchase another plot for ${plotPrice}? : ')
         if confirm:
             self.__money = self.__money - plotPrice
-            if self.__money < 0:
+            if self.__money < plotPrice:
                 self.__money = self.__money + plotPrice
                 print("You don't have enough money to make this purchase.")
             else:
@@ -103,7 +103,7 @@ class Farmer(object):
         for plots in self.totalPlots:
             if plots.get_owned():
                 counter += 1
-        whichPlot = toolbox.get_integer_between(1, counter, "Which plot? ")
+        whichPlot = toolbox.get_integer_between(1, counter, "Which plot? ", "**ERROR: You must choose an owned plot**")
         whichPlot = whichPlot - 1
         return whichPlot
 

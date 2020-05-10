@@ -55,6 +55,7 @@ class Simulation(object):
                 self.__farmer.buy_plot()
             elif command == 'sell land':
                 self.__farmer.sell_plot()
+                self.show_plots()
             elif command == 'sell animal':
                 self.sell_animals()
             elif command == 'back':
@@ -199,7 +200,7 @@ class Simulation(object):
                 plantNumber += 1
             print('==================================================')
             numberOfCrops = len(self.__plants)
-            plantType = toolbox.get_integer_between(1, numberOfCrops, "Which crop do you want to plant? ")
+            plantType = toolbox.get_integer_between(1, numberOfCrops, "Which crop do you want to plant? ", "**ERROR: You must choose a number from 1-4**")
             #print(self.__plants)
             #print(plantType)
             plant = self.__plants[plantType-1]
@@ -224,7 +225,7 @@ class Simulation(object):
                 print(string)
                 animalNumber += 1
             print('==================================================')
-            animalType = toolbox.get_integer_between(1, animalNumber-1, "Which animal do you want to purchase? ")
+            animalType = toolbox.get_integer_between(1, animalNumber-1, "Which animal do you want to purchase? ", "**ERROR: You must choose a number from 1-4**")
             animal = self.__animals[animalType-1]
             contents = animal.get_type()
             self.__farmer.import_animal(whichPlot, contents, animalType-1)
@@ -242,7 +243,7 @@ class Simulation(object):
         self.__economy.determine_success(self.__farmer.totalPlots)
         balance = self.__economy.print_results(self.__farmer.totalPlots, self.__farmer.get_farmHands(), self.__farmer.get_family(), self.__farmer.get_money())
         self.__farmer.set_money(balance)
-        answer = input("\n<Press RETURN to continue>")
+        answer = input("<Press RETURN to continue>")
         self.__economy.reset_plots(self.__farmer.totalPlots)
 
     def print_farmHand_options(self):
@@ -265,7 +266,7 @@ class Simulation(object):
         :return:
         """
         self.print_family()
-        choice = toolbox.get_integer_between(1, 3, 'Which family size would you like? ')
+        choice = toolbox.get_integer_between(1, 3, 'Which family size would you like? ', "**ERROR: You must choose a number from 1-3**")
         if choice == 1:
             family = 2
             farmHands = 3
@@ -285,7 +286,9 @@ class Simulation(object):
         string += '\n3.) Three Children'
         string += '\n(Your starting children and farm hands will add up to 3, not counting you,'
         string += '\nto account for the four plots that need to be worked on initially.'
-        string += '\neg: option one will give you no children, but will assign you three farm hands.)'
+        string += '\neg: option one will give you no children, but will assign you three farm hands.'
+        string += '\nEach carry expenses, as you have too provide your family with food, which costs'
+        string += "\nmoney, or pay farmhands a salary. It's up to you to decide what you want.)"
         string += '\n-----------------------\n'
         print(string)
 

@@ -85,8 +85,8 @@ class Economy(object):
     def print_results(self, totalPlots, farmhands, family, balance):
         string = "################################################################################################\n"
         string += f"                               YOUR FARM RESULTS: {self.__year}\n"
-        string += "################################################################################################\n\n"
-        string += f"\n**** Plants ****\n\n"
+        string += "################################################################################################\n"
+        string += f"**** Plants ****\n\n"
         totalPlantProfit = 0
         for plot in totalPlots:
             if plot.get_owned():
@@ -95,12 +95,12 @@ class Economy(object):
                         plant = self.__plants[plot.get_index()]
                         string += f"{plant.get_type()}:\n"
                         if plot.get_success():
-                                string += f"     ${plant.get_sellValue():0.2f} per bushel \n\n"
+                                string += f"     ${plant.get_sellValue():0.2f} per bushel\n"
                                 plantProfit = (plant.get_sellValue()*100)
                                 string += f"     ${plant.get_sellValue():0.2f} x {plot.get_count()} bushels         =      ${plantProfit:0.2f}\n\n"
                                 totalPlantProfit += plantProfit
                         else:
-                            string += "FAILED\n   *$0 earned\n\n"
+                            string += "   FAILED\n   *$0 earned\n\n"
         string += f"**** Animals ****\n\n"
         totalAnimalProfit = 0
         for plot in totalPlots:
@@ -108,29 +108,29 @@ class Economy(object):
                 if plot.check_isempty() == False:
                     if plot.get_type() == 'animal':
                         animal = self.__animals[plot.get_index()]
-                        string += f"{animal.get_type()}-\n     {animal.get_product()}: ${animal.get_productValue():0.2f} per pound\n"
+                        string += f"{animal.get_type()}:\n     {animal.get_product()}: ${animal.get_productValue():0.2f} per lb\n"
                         pounds = plot.get_count()*2
-                        string += f"     Pounds Produced: {pounds}\n"
+                        string += f"     Produced: {pounds} lbs\n"
                         animalProfit = (pounds) * (animal.get_productValue())
                         string += f"     Revenue : {pounds} lbs x ${animal.get_productValue():0.2f}     =      ${animalProfit:0.2f}\n"
                         totalAnimalProfit += animalProfit
         string += "################################################################################################\n\n"
-        string += f"**** Expenses ****\n\n"
+        string += f"**** Expenses ****\n"
         string += f"Providing for family = $5 per Family Member\nPaying Farmhands = $7 per Farmhand\n"
         familyCost = (family*5)
         string += f"$5.00 x {family} Family Members    =    ${familyCost:0.2f}\n"
         farmhandCost = (farmhands * 7)
         string += f"$7.00 x {farmhands} Farmhand(s)    =    ${farmhandCost:0.2f}\n\n"
-        string += "################################################################################################\n\n"
+        string += "################################################################################################\n"
         string += f"**** Totals ****\n\n"
         totalRevenue = totalAnimalProfit + totalPlantProfit
         totalExpenses = farmhandCost + familyCost
-        string += f"                             Total Revenue     =     ${totalRevenue:0.2f}\n"
-        string += f"                                  Expenses     =     ${totalExpenses:0.2f}\n\n"
+        string += f"                       Total Revenue     =     ${totalRevenue:0.2f}\n"
+        string += f"                            Expenses     =     ${totalExpenses:0.2f}\n\n"
         moneyEarned = totalRevenue-totalExpenses
-        string += f"Total Revenue - Expenses = Yearly Earnings     =     ${moneyEarned:0.2f}\n\n"
+        string += f"                     Yearly Earnings     =     ${moneyEarned:0.2f}\n"
         balance = balance + moneyEarned
-        string += f"                          Updated Balance      =     ${balance:0.2f}\n"
+        string += f"                    Updated Balance      =     ${balance:0.2f}\n"
         string += "################################################################################################"
         print(string)
         return balance

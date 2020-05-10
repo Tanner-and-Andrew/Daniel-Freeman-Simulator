@@ -6,43 +6,24 @@ class Economy(object):
         self.__animals = animals
         self.__plants = plants
         self.__year = 1849
-        self.__previous_farm_report = ''
-        #self.original_report()
-        """self.__crop1 = plants[0]
-        self.__crop2 = crop2
-        self.__crop3 = crop3
-        self.__crop4 = crop4
-        self.__cows = cows
-        self.__sheep = sheep
-        self.__chickens = chickens
-        self.__goats = goats"""
-
-    def original_report(self):
-        string = "################################################################################################\n"
-        string += f"                               ANNUAL FARM REPORT: {self.__year}\n"
-        string += "################################################################################################\n\n"
-        string += f"\n**** Plants ****\n\n"
-        for plant in self.__plants:
-            string += f"{plant.get_type()}: ${plant.get_sellValue():0.2f} per bushel\n\n"
-        string += f"**** Animals ****\n\n"
-        for animal in self.__animals:
-            string += f"{animal.get_type()}-\n     {animal.get_product()}: ${animal.get_productValue():0.2f} per pound"
-            string += f"\n     Price per {animal.get_type()}: ${animal.get_sellValue():0.2f}\n"
-        self.__previous_farm_report = string
-        print(string)
 
     def get_year(self):
         return self.__year
 
     def run(self):
+        """
+        runs the economy and creates the farm report
+        :return: None
+        """
         self.__year += 1
         self.randomize_plants()
-        #self.randomize_animals()
         self.print_farm_report()
-        #success = self.determine_success()
-        #self.print_results(success)
 
     def randomize_plants(self):
+        """
+        randomizes the prices for the crops in a year
+        :return: None
+        """
         for plant in self.__plants:
             sellValue = plant.get_sellValue()
             lowerLimit = plant.get__lowerLimit()
@@ -55,7 +36,10 @@ class Economy(object):
             plant.set_sellValue(sellValue)
 
     def print_farm_report(self):
-        #self.__year += 1
+        """
+        prints the total farm report for all crops and animals
+        :return: None
+        """
         string = "################################################################################################\n"
         string += f"                               ANNUAL FARM REPORT: {self.__year}\n"
         string += "################################################################################################\n\n"
@@ -72,7 +56,11 @@ class Economy(object):
         print(string)
 
     def determine_success(self, totalPlots):
-        #ownedPlots = Farmer.get_totalPlots_length()
+        """
+        determines if a crop succeeds and makes money or not
+        :param totalPlots: the list of the total plots on the farm
+        :return: None
+        """
         for plot in totalPlots:
             if plot.get_owned():
                 if plot.check_isempty() == False:
@@ -83,6 +71,14 @@ class Economy(object):
                             plot.set_success(False)
 
     def print_results(self, totalPlots, farmhands, family, balance):
+        """
+        prints the user's personal results and earnings
+        :param totalPlots: the list of the total plots on the farm
+        :param farmhands: the number of farmhands on the farm
+        :param family: the number of family on the farm
+        :param balance: the user's current balance of money
+        :return: the user's new balance of money
+        """
         string = "################################################################################################\n"
         string += f"                               YOUR FARM RESULTS: {self.__year}\n"
         string += "################################################################################################\n"
@@ -136,21 +132,13 @@ class Economy(object):
         return balance
 
     def reset_plots(self, totalPlots):
+        """
+        resets the plant plots to empty
+        :param totalPlots: a list of the total plots on the farm
+        :return: None
+        """
         for plot in totalPlots:
             plot.reset_plant_plot()
-
-
-
-
-
-
-
-
-
-
-
-    def get_previous_report(self):
-        return self.__previous_farm_report
 
 
 

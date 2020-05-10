@@ -22,16 +22,30 @@ class Plot(object):
         #self.read_animals('animals.csv')
 
     def reset_plant_plot(self):
+        """
+        resets the plot to empty after a year for plants
+        :return: None
+        """
         if self.__type == "crop":
             self.__init__()
             self.__owned = True
 
     def reset_animal_plot(self):
+        """
+        resets the plot to empty after animal is sold
+        :return: None
+        """
         if self.__type == "animal":
             self.__init__()
             self.__owned = True
 
     def set_plant(self, string, index):
+        """
+        sets a plant on a plot
+        :param string: the contents, or the specific crop
+        :param index: where the crop is in self.__plants
+        :return: None
+        """
         self.__contents = string
         self.__type = 'crop'
         self.__isEmpty = False
@@ -39,6 +53,11 @@ class Plot(object):
         self.__index = index
 
     def set_animal(self, string, index):
+        """
+        sets an animal on a plot
+        :param string: the contents, or the specific animal
+        :param index: where the animal is in self.__animals
+        """
         self.__contents = string
         self.__type = 'animal'
         self.__isEmpty = False
@@ -84,15 +103,5 @@ class Plot(object):
     def __str__(self):
         print(f'{self.__owned}')
 
-    def print_plot(self):
-        return f"""  
- ________________
-|                |
-|                | 
-|     {self.__contents}      |
-|                | 
-|                |
-|________________| 
-           """
 
 

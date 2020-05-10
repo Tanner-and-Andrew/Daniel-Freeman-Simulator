@@ -10,8 +10,6 @@ import toolbox
 class Simulation(object):
 
     def __init__(self):
-        '''self.__plotList = [True, True, True, True, False, False, False, False, False, False, False,
-                           False, False, False, False, False, False, False, False, False, False, False]'''
         self.__menu = 'main'
         self.__farmer = None
         self.__plants = []
@@ -111,12 +109,20 @@ class Simulation(object):
         self.status_bar()
 
     def status_bar(self):
+        """
+        Displays helpful information relating to the farm.
+        :return: None
+        """
         string = f"Year: {self.__economy.get_year()+1}  Balance: ${self.__farmer.get_money():0.2f}   "
         workers = (self.__farmer.get_farmHands() + (self.__farmer.get_family()-1))
         string += f"Total Workers: {workers}   Plots Owned: {self.__farmer.get_owned_plots()}\n"
         print(string)
 
     def sell_animals(self):
+        """
+        asks if they want to sell animals and removes them from that plot.
+        :return: None
+        """
         whichPlot = self.__farmer.get_plot()
         plotList = self.__farmer.get_totalPlots()
         exists = False
@@ -174,12 +180,20 @@ class Simulation(object):
                 self.__animals.append(animal)
 
     def reset(self):
+        """
+        resets the game entirely
+        :return: None
+        """
         confirm = toolbox.get_boolean("Are you sure you want to reset? All progress will be lost. ")
         if confirm:
             self.__init__()
             self.main()
 
     def plant(self):
+        """
+        asks which plot and plants the crop of their choice on the plot
+        :return: None
+        """
         whichPlot = self.__farmer.get_plot()
         plotList = self.__farmer.totalPlots
         while not plotList[whichPlot].check_isempty():
@@ -209,6 +223,10 @@ class Simulation(object):
             self.status_bar()
 
     def import_animal(self):
+        """
+        asks which plot and puts the animal of their choice on the plot
+        :return: None
+        """
         whichPlot = self.__farmer.get_plot()
         plotList = self.__farmer.totalPlots
         while not plotList[whichPlot].check_isempty():
@@ -311,6 +329,10 @@ class Simulation(object):
         print(string)
 
     def show_plots(self):
+        """
+        displays the plots in aan organized format with the contents
+        :return: None
+        """
         contentList = []
         plotList = self.__farmer.totalPlots
         for plot in plotList:

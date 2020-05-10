@@ -27,6 +27,10 @@ class Farmer(object):
         self.__money = money
 
     def get_owned_plots(self):
+        """
+        gets the number of plots owned
+        :return: number of plots owned
+        """
         counter = 0
         for plots in self.totalPlots:
             if plots.get_owned():
@@ -34,6 +38,10 @@ class Farmer(object):
         return counter
 
     def set_owned(self):
+        """
+        sets the plots given at the beginning of the game to owned
+        :return: None
+        """
         counter = 0
         while counter < 4:
             self.totalPlots[counter].set_owned(True)

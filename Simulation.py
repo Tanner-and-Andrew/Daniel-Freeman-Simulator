@@ -128,6 +128,7 @@ class Simulation(object):
     def sell_animals(self):
         whichPlot = self.__farmer.get_plot()
         plotList = self.__farmer.get_totalPlots()
+        exists = False
         for plot in plotList:
             if plot.get_type() == 'animal':
                 exists = True
@@ -325,14 +326,14 @@ class Simulation(object):
  ________________ ________________ ________________ ________________ ________________
 |                |                |                |                |                |        
 |                |                |                |                |                |
-|       11       |        12      |       13       |       14       |       15       |
+|       11       |       12       |       13       |       14       |       15       |
 |{contentList[10]:^16}|{contentList[11]:^16}|{contentList[12]:^16}|{contentList[13]:^16}|{contentList[14]:^16}|
 |                |                |                |                |                |
 |________________|________________|________________|________________|________________|
  ________________ ________________ ________________ ________________ ________________
 |                |                |                |                |                |        
 |                |                |                |                |                |
-|       16       |        17      |       18       |       19       |       20       |
+|       16       |       17       |       18       |       19       |       20       |
 |{contentList[15]:^16}|{contentList[16]:^16}|{contentList[17]:^16}|{contentList[18]:^16}|{contentList[19]:^16}|
 |                |                |                |                |                |
 |________________|________________|________________|________________|________________|

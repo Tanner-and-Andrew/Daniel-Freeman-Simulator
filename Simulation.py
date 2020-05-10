@@ -2,6 +2,7 @@ from Farmer import Farmer
 from Economy import Economy
 from Plants import Plants
 from Animals import Animals
+from time import sleep
 from Plot import Plot
 import toolbox
 
@@ -28,25 +29,14 @@ class Simulation(object):
             if command == 'help':
                 self.help('farmhelp.txt')
             elif command == 'advance':
-                self.advance()
-                """self.__economy.run()
-                answer = input("<Press RETURN to continue>")
-                self.__economy.determine_success(self.__farmer.totalPlots)
-                balance = self.__economy.print_results(self.__farmer.totalPlots, self.__farmer.get_farmHands(), self.__farmer.get_family(), self.__farmer.get_money())
-                self.__farmer.set_money(balance)
-                answer = input("\n<Press RETURN to continue>")
-                self.__economy.reset_plots(self.__farmer.totalPlots)"""
+                command = self.advance()
             elif command == 'plant':
                 self.plant()
             elif command == 'breed':
                 self.import_animal()
             elif command == 'shop':
                 self.__menu = 'shop'
-                #2self.get_menu()
             elif command == 'report':
-                #if self.__economy.get_year() == 1849:
-                    #self.__economy.original_report()
-                #else:
                 self.__economy.print_farm_report()
                 answer = input("<Press RETURN to continue>")
             elif command == 'reset':
@@ -60,11 +50,12 @@ class Simulation(object):
                 self.sell_animals()
             elif command == 'back':
                 self.__menu = 'main'
-            #self.__farmer.show_plots()
-            #self.status_bar()
-            self.get_menu()
-            self.__menu = 'main'
-            command = self.get_command()
+            if command == 'quit':
+                print("\n          ...GAME OVER...")
+            else:
+                self.get_menu()
+                self.__menu = 'main'
+                command = self.get_command()
 
     def get_menu(self):
         """
@@ -205,13 +196,15 @@ class Simulation(object):
             print('==================================================')
             numberOfCrops = len(self.__plants)
             plantType = toolbox.get_integer_between(1, numberOfCrops, "Which crop do you want to plant? ", "**ERROR: You must choose a number from 1-4**")
-            #print(self.__plants)
-            #print(plantType)
             plant = self.__plants[plantType-1]
             contents = plant.get_type()
             self.__farmer.plant(whichPlot, contents, plantType-1)
             money = self.__farmer.get_money() - plant.get_price()
-            self.__farmer.set_money(money)
+            if self.__money < money:
+                self.__money = self.__money + money
+                print("You don't have enough money to make this purchase.")
+            else:
+                self.__farmer.set_money(money)
             self.show_plots()
             self.status_bar()
 
@@ -235,7 +228,11 @@ class Simulation(object):
             contents = animal.get_type()
             self.__farmer.import_animal(whichPlot, contents, animalType-1)
             money = self.__farmer.get_money() - animal.get_price()
-            self.__farmer.set_money(money)
+            if self.__money < money:
+                self.__money = self.__money + money
+                print("You don't have enough money to make this purchase.")
+            else:
+                self.__farmer.set_money(money)
             self.show_plots()
             self.status_bar()
 
@@ -251,8 +248,21 @@ class Simulation(object):
         self.__farmer.set_money(balance)
         answer = input("<Press RETURN to continue>")
         self.__economy.reset_plots(self.__farmer.totalPlots)
-        self.show_plots()
-        self.status_bar()
+        if self.__farmer.get_money() < 0:
+            print("You have lost all your money and are now in debt. You are forced to sell your children and farm,")
+            print("and you are now on the run from the government, with a warrant for your arrest due to tax")
+            print("evasion. Better luck next time.")
+            answer = toolbox.get_boolean("Would you like to reset the game?")
+            if answer:
+                self.reset()
+            else:
+                command = 'quit'
+        else:
+            command = ''
+            self.show_plots()
+            self.status_bar()
+        return command
+
 
     def print_farmHand_options(self):
         """
@@ -296,8 +306,7 @@ class Simulation(object):
         string += '\nto account for the four plots that need to be worked on initially.'
         string += '\neg: option one will give you no children, but will assign you three farm hands.'
         string += '\nEach carry expenses, as you have too provide your family with food, which costs'
-        string += "\nmoney, or pay farmhands a salary. It's up to you to decide w2" \
-                  "22222hat you want.)"
+        string += "\nmoney, or pay farmhands a salary. It's up to you to decide what you want."
         string += '\n-----------------------\n'
         print(string)
 

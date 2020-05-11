@@ -37,6 +37,17 @@ class Farmer(object):
                 counter += 1
         return counter
 
+    def get_filled_plots(self):
+        """
+        gets the number of plots filled
+        :return: number of plots filled
+        """
+        counter = 0
+        for plots in self.totalPlots:
+            if plots.check_isempty():
+                counter += 1
+        return counter
+
     def set_owned(self):
         """
         sets the plots given at the beginning of the game to owned
@@ -45,6 +56,7 @@ class Farmer(object):
         counter = 0
         while counter < 4:
             self.totalPlots[counter].set_owned(True)
+            self.totalPlots[counter].set_empty(True)
             counter += 1
 
     def hire_farmHands(self):

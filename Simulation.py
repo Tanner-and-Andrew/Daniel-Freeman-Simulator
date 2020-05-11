@@ -194,32 +194,39 @@ class Simulation(object):
         asks which plot and plants the crop of their choice on the plot
         :return: None
         """
-        whichPlot = self.__farmer.get_plot()
-        plotList = self.__farmer.totalPlots
-        while not plotList[whichPlot].check_isempty():
-            print('You must choose an empty plot.')
-            whichPlot = self.__farmer.get_plot()
+        counter = 0
+        for plot in self.__farmer.totalPlots:
+            if plot.check_isempty() == False and plot.get_owned() == True:
+                counter += 1
+        if counter == self.__farmer.get_owned_plots():
+            print("You have no empty plots. Advance to next year or buy more plots of land.")
         else:
-            print('==================================================')
-            plantNumber = 1
-            for plants in self.__plants:
-                string = f'==   {plantNumber} =  {plants.get_type()}  Price: ${plants.get_price():0.2f}  '
-                string += f'Chance of Success: {plants.get_risk()}%'
-                print(string)
-                plantNumber += 1
-            print('==================================================')
-            numberOfCrops = len(self.__plants)
-            plantType = toolbox.get_integer_between(1, numberOfCrops, "Which crop do you want to plant? ", "**ERROR: You must choose a number from 1-4**")
-            plant = self.__plants[plantType-1]
-            contents = plant.get_type()
-            self.__farmer.plant(whichPlot, contents, plantType-1)
-            money = self.__farmer.get_money() - plant.get_price()
-            if self.__farmer.get_money() < money:
-                oldBalance = self.__farmer.get_money() + money
-                self.__farmer.set_money(oldBalance)
-                print("You don't have enough money to make this purchase.")
+            whichPlot = self.__farmer.get_plot()
+            plotList = self.__farmer.totalPlots
+            while not plotList[whichPlot].check_isempty():
+                print('You must choose an empty plot.')
+                whichPlot = self.__farmer.get_plot()
             else:
-                self.__farmer.set_money(money)
+                print('==================================================')
+                plantNumber = 1
+                for plants in self.__plants:
+                    string = f'==   {plantNumber} =  {plants.get_type()}  Price: ${plants.get_price():0.2f}  '
+                    string += f'Chance of Success: {plants.get_risk()}%'
+                    print(string)
+                    plantNumber += 1
+                print('==================================================')
+                numberOfCrops = len(self.__plants)
+                plantType = toolbox.get_integer_between(1, numberOfCrops, "Which crop do you want to plant? ", "**ERROR: You must choose a number from 1-4**")
+                plant = self.__plants[plantType-1]
+                contents = plant.get_type()
+                self.__farmer.plant(whichPlot, contents, plantType-1)
+                money = self.__farmer.get_money() - plant.get_price()
+                if self.__farmer.get_money() < money:
+                    oldBalance = self.__farmer.get_money() + money
+                    self.__farmer.set_money(oldBalance)
+                    print("You don't have enough money to make this purchase.")
+                else:
+                    self.__farmer.set_money(money)
             self.show_plots()
             self.status_bar()
 
@@ -228,31 +235,39 @@ class Simulation(object):
         asks which plot and puts the animal of their choice on the plot
         :return: None
         """
-        whichPlot = self.__farmer.get_plot()
-        plotList = self.__farmer.totalPlots
-        while not plotList[whichPlot].check_isempty():
-            print('You must choose an empty plot.')
-            whichPlot = self.__farmer.get_plot()
+        counter = 0
+        for plot in self.__farmer.totalPlots:
+            if plot.check_isempty() == False and plot.get_owned() == True:
+                counter += 1
+        if counter == self.__farmer.get_owned_plots():
+            print("You have no empty plots. Advance to next year or buy more plots of land.")
         else:
-            print('==================================================')
-            animalNumber = 1
-            for animal in self.__animals:
-                string = f'==   {animalNumber} =  {animal.get_type()}  Price: {animal.get_price():0.2f}  '
-                string += f' Product: {animal.get_product()}  Earnings: ${animal.get_productValue():0.2f}'
-                print(string)
-                animalNumber += 1
-            print('==================================================')
-            animalType = toolbox.get_integer_between(1, animalNumber-1, "Which animal do you want to purchase? ", "**ERROR: You must choose a number from 1-4**")
-            animal = self.__animals[animalType-1]
-            contents = animal.get_type()
-            self.__farmer.import_animal(whichPlot, contents, animalType-1)
-            money = self.__farmer.get_money() - animal.get_price()
-            if self.__farmer.get_money() < money:
-                oldBalance = self.__farmer.get_money() + money
-                self.__farmer.set_money(oldBalance)
-                print("You don't have enough money to make this purchase.")
+            whichPlot = self.__farmer.get_plot()
+            plotList = self.__farmer.totalPlots
+            while not plotList[whichPlot].check_isempty():
+                print('You must choose an empty plot.')
+                whichPlot = self.__farmer.get_plot()
             else:
-                self.__farmer.set_money(money)
+                print('==================================================')
+                animalNumber = 1
+                for animal in self.__animals:
+                    string = f'==   {animalNumber} =  {animal.get_type()}  Price: {animal.get_price():0.2f}  '
+                    string += f' Product: {animal.get_product()}  Earnings: ${animal.get_productValue():0.2f}'
+                    print(string)
+                    animalNumber += 1
+                print('==================================================')
+                animalType = toolbox.get_integer_between(1, animalNumber-1, "Which animal do you want to purchase? ", "**ERROR: You must choose a number from 1-4**")
+                animal = self.__animals[animalType-1]
+                contents = animal.get_type()
+                self.__farmer.import_animal(whichPlot, contents, animalType-1)
+                money = self.__farmer.get_money() - animal.get_price()
+                if self.__farmer.get_money() < money:
+                    oldBalance = self.__farmer.get_money() + money
+                    self.__farmer.set_money(oldBalance)
+
+                    print("You don't have enough money to make this purchase.")
+                else:
+                    self.__farmer.set_money(money)
             self.show_plots()
             self.status_bar()
 

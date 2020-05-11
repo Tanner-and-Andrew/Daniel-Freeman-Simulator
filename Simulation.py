@@ -214,8 +214,9 @@ class Simulation(object):
             contents = plant.get_type()
             self.__farmer.plant(whichPlot, contents, plantType-1)
             money = self.__farmer.get_money() - plant.get_price()
-            if self.__money < money:
-                self.__money = self.__money + money
+            if self.__farmer.get_money() < money:
+                oldBalance = self.__farmer.get_money() + money
+                self.__farmer.set_money(oldBalance)
                 print("You don't have enough money to make this purchase.")
             else:
                 self.__farmer.set_money(money)
@@ -246,8 +247,9 @@ class Simulation(object):
             contents = animal.get_type()
             self.__farmer.import_animal(whichPlot, contents, animalType-1)
             money = self.__farmer.get_money() - animal.get_price()
-            if self.__money < money:
-                self.__money = self.__money + money
+            if self.__farmer.get_money() < money:
+                oldBalance = self.__farmer.get_money() + money
+                self.__farmer.set_money(oldBalance)
                 print("You don't have enough money to make this purchase.")
             else:
                 self.__farmer.set_money(money)

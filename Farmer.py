@@ -91,6 +91,9 @@ class Farmer(object):
                 print("You don't have enough money to make this purchase.")
             else:
                 counter = 0
+                #
+                # Loop through the list of plots and count the number of plots owned
+                #
                 for plots in self.totalPlots:
                     if plots.get_owned():
                         counter += 1

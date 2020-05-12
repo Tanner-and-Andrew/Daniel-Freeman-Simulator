@@ -5,6 +5,7 @@ from Animals import Animals
 from time import sleep
 from Plot import Plot
 import toolbox
+from time import sleep
 
 
 class Simulation(object):
@@ -19,7 +20,7 @@ class Simulation(object):
         self.__economy = Economy(self.__animals, self.__plants)
 
     def main(self):
-        #self.help()
+        self.help('farmhelp.txt')
         command = ''
         self.get_family()
         self.show_plots()
@@ -105,8 +106,6 @@ class Simulation(object):
         if prompt:
             input('\n' + prompt)
         hi = input("\n\npress <return> to continue")
-        self.show_plots()
-        self.status_bar()
 
     def status_bar(self):
         """
@@ -128,16 +127,22 @@ class Simulation(object):
         exists = False
         for plot in plotList:
             if plot.get_type() == 'animal':
+                #
+                # Makes sure there exists a plot with animals to sell
+                #
                 exists = True
         if exists:
             while plotList[whichPlot].get_type() != 'animal':
                 whichPlot = self.__farmer.get_plot()
             else:
                 index = plotList[whichPlot].get_index()
-                money = self.__farmer.get_money() + (plotList[whichPlot].get_count() *
-                                                     self.__animals[index].get_sellValue())
+                profit = (plotList[whichPlot].get_count() * self.__animals[index].get_sellValue())
+                money = self.__farmer.get_money() + profit
                 self.__farmer.set_money(money)
                 plotList[whichPlot].reset_animal_plot()
+                print(f'Balance: ${self.__farmer.get_money()-profit:0.2f} + ${profit:0.2f} ='
+                      f' ${self.__farmer.get_money():0.2f}')
+                sleep(2)
         self.show_plots()
         self.status_bar()
 

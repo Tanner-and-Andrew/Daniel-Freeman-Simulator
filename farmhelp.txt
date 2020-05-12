@@ -1,0 +1,29 @@
+     ************************************************************************************************
+     **                                                                                            **
+     **                                   Homesteading Simulator                                   **
+     **                                                                                            **
+     ************************************************************************************************
+     **                                                                                            **
+     **           This is an original game created by Andrew Lofgren and Tanner Lebo               **
+     **                                                                                            **
+     **       In this game you will play a new homesteader, trying to make it on his new land      **
+     **             You will be assigned four plots of land to do with as you like.                **
+     **  Each year you will plant crops and/or buy/manage livestock in an effort to turn a profit. **
+     **                                                                                            **
+     **     You can use the following commands:                                                    **
+     **                                                                                            **
+     **         Plant    [P]: Asks you for which plot and which crop, then plants on that plot     **
+     **         Breed    [B]: Asks which plot and which type of livestock, then fills that plot    **
+     **         Advance  [A]: Advances the game to the next year. Show's farm reports              **
+     **         Reset    [R]: Resets the game and starts you over from the beginning               **
+     **         Quit     [Q]: Quits the game completely                                            **
+     **         Report   [Y]: Allows you to see the previous year's                                **
+     **         Shop     [S]: Opens and makes the shop menu available                              **
+     **         Back     [B]: Exits the shop                                                       **
+     **       Buy:                                                                                 **
+     **         Land     [L]: Purchases another plot of land to be accessible                      **
+     **       Sell:                                                                                **
+     **         Land     [N]: Sells one of the owned plots                                         **
+     **         Animal   [M]: Asks which plot and sells the animals on that plot                   **
+     **                                                                                            **
+     ************************************************************************************************

@@ -118,11 +118,11 @@ def get_positive_number(prompt):
     return number
 
 
-def get_integer_between(low, high, prompt="Enter an integer:"):
+def get_integer_between(low, high, prompt="Enter an integer:", error="ERROR: You must choose one of the options"):
     prompt += " (" + str(low) + "-" + str(high) + ")"
     number = get_integer(prompt)
     while (number < low) or (number > high):
-        "You must choose an owned plot."
+        print(error)
         number = get_integer(prompt)
     return number
 

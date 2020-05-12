@@ -27,16 +27,36 @@ class Farmer(object):
         self.__money = money
 
     def get_owned_plots(self):
+        """
+        gets the number of plots owned
+        :return: number of plots owned
+        """
         counter = 0
         for plots in self.totalPlots:
             if plots.get_owned():
                 counter += 1
         return counter
 
+    def get_filled_plots(self):
+        """
+        gets the number of plots filled
+        :return: number of plots filled
+        """
+        counter = 0
+        for plots in self.totalPlots:
+            if plots.check_isempty():
+                counter += 1
+        return counter
+
     def set_owned(self):
+        """
+        sets the plots given at the beginning of the game to owned
+        :return: None
+        """
         counter = 0
         while counter < 4:
             self.totalPlots[counter].set_owned(True)
+            self.totalPlots[counter].set_empty(True)
             counter += 1
 
     def hire_farmHands(self):
@@ -63,20 +83,24 @@ class Farmer(object):
         :return: None
         """
         plotPrice = 50
-        confirm = toolbox.get_boolean('Are you sure you want to purchase another plot? : ')
+        confirm = toolbox.get_boolean(f'Are you sure you want to purchase another plot for ${plotPrice}? : ')
         if confirm:
             self.__money = self.__money - plotPrice
-            if self.__money < 0:
+            if self.__money < plotPrice:
                 self.__money = self.__money + plotPrice
                 print("You don't have enough money to make this purchase.")
             else:
                 counter = 0
+                #
+                # Loop through the list of plots and count the number of plots owned
+                #
                 for plots in self.totalPlots:
                     if plots.get_owned():
                         counter += 1
                 self.totalPlots[counter].set_owned(True)
+                self.totalPlots[counter].set_contents("EMPTY")
                 self.hire_farmHands()
-                print('You also hired a farmhand to work on the new land.')
+                print('\nYou also hired a farmhand to work on the new land.\n')
 
     def sell_plot(self):
         """
@@ -102,7 +126,7 @@ class Farmer(object):
         for plots in self.totalPlots:
             if plots.get_owned():
                 counter += 1
-        whichPlot = toolbox.get_integer_between(1, counter, "Which plot? ")
+        whichPlot = toolbox.get_integer_between(1, counter, "Which plot? ", "**ERROR: You must choose an owned plot**")
         whichPlot = whichPlot - 1
         return whichPlot
 

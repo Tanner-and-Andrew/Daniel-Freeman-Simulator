@@ -60,7 +60,7 @@ class Plot(object):
         """
         self.__contents = string
         self.__type = 'animal'
-        self.__isEmpty = ''
+        self.__isEmpty = False
         self.__count = 10
         self.__index =  index
 
